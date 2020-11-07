@@ -69,3 +69,6 @@ gem 'devise'
 
 # Bootstrap gem
 gem 'bootstrap-sass', '~> 3.3.6'
+
+# Ruby wrapper for The Movie Database API
+gem 'themoviedb' 

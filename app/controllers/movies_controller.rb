@@ -1,16 +1,28 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_user!, except: [:index, :show]
-  
+
+  def search
+    if params[:q].present?
+    @movie = movie_service.find(params[:q])
+    end
+  end
+
   # GET /movies
   # GET /movies.json
   def index
-    @movies = Movie.all
+    if current_user.present?
+      @movies = current_user.movies
+    end
   end
 
+  def show
+  end
   # GET /movies/1
   # GET /movies/1.json
-  def show
+  def showSearch
+    @movieAPI = MoviePresenter.new(movie_detail).data
+    @movieAPI[:image_path] = "#{image_path}/w300_and_h450_bestv2#{@movieAPI.poster_path}"
   end
 
   # GET /movies/new
@@ -62,6 +74,19 @@ class MoviesController < ApplicationController
     end
   end
 
+  def movie_detail
+    movie_service.movie_detail(params[:id])
+  end
+
+  def image_path
+    @image_path ||= movie_service.configuration.base_url
+  end
+
+  def movie_service
+    @movie_service ||= MovieDbService.new
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
@@ -70,6 +95,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.require(:movie).permit(:title, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_url)
+      params.permit(:title, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_url)
     end
 end

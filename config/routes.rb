@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resources :movies
 
   root 'movies#index'
+  get 'search' => 'movies#search'
+  get 'showSearch' => 'movies#showSearch'
 end
