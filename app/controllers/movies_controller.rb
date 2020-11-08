@@ -1,10 +1,15 @@
 class MoviesController < ApplicationController
+  before_action :set_variables
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show, :home]
+
+  def home 
+    @movies = movie_service.popular
+  end
 
   def search
     if params[:q].present?
-    @movie = movie_service.find(params[:q])
+      @movies = movie_service.find(params[:q])
     end
   end
 
@@ -18,11 +23,12 @@ class MoviesController < ApplicationController
 
   def show
   end
+
   # GET /movies/1
   # GET /movies/1.json
-  def showSearch
+  def view
     @movieAPI = MoviePresenter.new(movie_detail).data
-    @movieAPI[:image_path] = "#{image_path}/w300_and_h450_bestv2#{@movieAPI.poster_path}"
+    @movieAPI[:image_path] = "#{@image_path}/w300_and_h450_bestv2#{@movieAPI.poster_path}"
   end
 
   # GET /movies/new
@@ -78,10 +84,6 @@ class MoviesController < ApplicationController
     movie_service.movie_detail(params[:id])
   end
 
-  def image_path
-    @image_path ||= movie_service.configuration.base_url
-  end
-
   def movie_service
     @movie_service ||= MovieDbService.new
   end
@@ -91,6 +93,10 @@ class MoviesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])
+    end
+
+    def set_variables
+      @image_path ||= movie_service.configuration.base_url
     end
 
     # Only allow a list of trusted parameters through.

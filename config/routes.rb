@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :movies
 
-  root 'movies#index'
+  root 'movies#home'
   get 'search' => 'movies#search'
-  get 'showSearch' => 'movies#showSearch'
+  get 'view' => 'movies#view'
 end

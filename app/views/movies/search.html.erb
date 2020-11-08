@@ -1,6 +1,1 @@
-<%unless @movie.nil?
-    @movie.each do |item| %>
-      <p> <%= link_to item.title, "/showSearch?id=#{item.id}" %> </p>
-      <p> <%= item.id %> </p>
-<%end
-    end-%>
+<%= render partial: 'shared/movieslist' %>

@@ -1,44 +1,8 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>Title:</strong>
-  <%= @movie.title %>
-</p>
-
-<p>
-  <strong>Rating:</strong>
-  <%= @movie.rating %>
-</p>
-
-<p>
-  <strong>Genres:</strong>
-  <%= @movie.genres %>
-</p>
-
-<p>
-  <strong>Casts:</strong>
-  <%= @movie.casts %>
-</p>
-
-<p>
-  <strong>Synopsis:</strong>
-  <%= @movie.synopsis %>
-</p>
-
-<p>
-  <strong>Runtime:</strong>
-  <%= @movie.runtime %>
-</p>
-
-<p>
-  <strong>Release date:</strong>
-  <%= @movie.release_date %>
-</p>
-
-<p>
-  <strong>Img url:</strong>
   <img src="<%= @movie.img_url%>", alt="Poster" >
 </p>
 
+<%= render 'shared/moviedetails', :movie => @movie %>
+
 <%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %> |
+<%= link_to 'Back', movies_path %> | 
