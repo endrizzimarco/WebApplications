@@ -1,0 +1,7 @@
+.row
+  - unless @movies.nil?
+    - @movies.each do |movie|
+      .col-sm-2.col-md-3
+        .thumbnail.black
+          %a{href: "/view?id=#{movie.id}"}
+            %img{src: "#{@image_path}/w780#{movie.poster_path}", alt: "Poster,", style: "width:100%"}

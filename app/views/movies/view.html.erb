@@ -1,9 +1,0 @@
-<p>
-  <img src="<%= @movieAPI.image_path%>", alt="Poster" >
-</p>
-
-<%= render 'shared/moviedetails', :movie => @movieAPI %>
-
-<%= link_to 'Back', movies_path %> |
-<%= link_to 'Create', movies_path(:title => @movieAPI.title, :rating => @movieAPI.rating, :genres => @movieAPI.genres, :casts => @movieAPI.casts, :synopsis => @movieAPI.synopsis, :runtime => @movieAPI.runtime, :release_date => @movieAPI.release_date, :img_url => @movieAPI.image_path), :method => :post %>
-

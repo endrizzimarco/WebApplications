@@ -1,0 +1,5 @@
+- if !user_signed_in?
+  .jumbotron
+    %h1 WOW I AM SO GOOD AT USING JUMBOTRONS ALSO WHY IS THIS BUTTON BLACK
+    %p= link_to "Sign Up To Write A Review", new_user_registration_path, class: "btn btn-lg"
+= render partial: 'shared/movieslist'

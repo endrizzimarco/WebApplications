@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_variables
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, except: [:index, :show, :home]
+  before_action :authenticate_user!, only: [:index, :create]
 
   def home 
     @movies = movie_service.popular
@@ -28,7 +28,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def view
     @movieAPI = MoviePresenter.new(movie_detail).data
-    @movieAPI[:image_path] = "#{@image_path}/w300_and_h450_bestv2#{@movieAPI.poster_path}"
+    @movieAPI[:image_path] = "#{@image_path}/w400#{@movieAPI.poster_path}"
   end
 
   # GET /movies/new
@@ -47,7 +47,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully created.' }
+        format.html { redirect_to @movie, notice: 'Movie was successfully added to watchlist' }
         format.json { render :show, status: :created, location: @movie }
       else
         format.html { render :new }

@@ -72,3 +72,6 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 # Ruby wrapper for The Movie Database API
 gem 'themoviedb' 
+
+# Using haml instead of erb
+gem 'haml-rails'
