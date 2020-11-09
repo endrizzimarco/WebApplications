@@ -30,4 +30,13 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  app_title: MyMovieList
+  app_description: A place where you can keep track of all the movies you've watched.
+
+  layouts:
+    application:
+      title: MyMovieList
+  
+  movies:
+
+  shared:

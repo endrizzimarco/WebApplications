@@ -10,7 +10,7 @@ class MoviePresenter
       genres: @movie['genres'].map { |genre| genre['name'] }.join(' / '),
       synopsis: @movie['overview'],
       rating: @movie['vote_average'],
-      casts: @movie['casts'].join(', '),
+      casts: @movie['casts'].join(','),
       tagline: @movie['tagline'],
       runtime: @movie['runtime'],
       release_date: @movie['release_date'],

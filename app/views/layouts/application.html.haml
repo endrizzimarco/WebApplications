@@ -1,12 +1,12 @@
 !!!
 %html
   %head
-    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
     %meta{charset: "utf-8"}/
-    %meta{content: "ie=edge", "http-equiv" => "x-ua-compatible"}/
-    %title MovieReview
-    %meta{content: "Coursework for COM2025", name: "description"}/
-    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}/
+    %meta{content: "ie=edge", "http-equiv" => "x-ua-compatible"}
+    %title= t('.title')
+    %meta{content: "Coursework for COM2025", name: "description"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
     = stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag  'application', 'data-turbolinks-track': 'reload'
     = csrf_meta_tags

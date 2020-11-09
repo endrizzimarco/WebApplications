@@ -1,7 +1,4 @@
-%p
-  %img{src: "#{@movie.img_url}", alt: "Poster"}
-
-= render 'shared/moviedetails', movie: @movie
+= render 'shared/moviedetails', movie: @movie, show: true
 
 = link_to 'Edit', edit_movie_path(@movie)
 |

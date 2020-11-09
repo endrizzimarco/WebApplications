@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_variables
   before_action :set_movie, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :create]
+  before_action :authenticate_user!, only: [:create]
 
   def home 
     @movies = movie_service.popular
@@ -17,6 +17,7 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     if current_user.present?
+      @index = true
       @movies = current_user.movies
     end
   end
@@ -28,7 +29,7 @@ class MoviesController < ApplicationController
   # GET /movies/1.json
   def view
     @movieAPI = MoviePresenter.new(movie_detail).data
-    @movieAPI[:image_path] = "#{@image_path}/w400#{@movieAPI.poster_path}"
+    @movieAPI[:img_path] = "#{@image_path}w400#{@movieAPI.poster_path}"
   end
 
   # GET /movies/new
@@ -101,6 +102,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.permit(:title, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_url)
+      params.permit(:title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
     end
 end
