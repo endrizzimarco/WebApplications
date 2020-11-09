@@ -11,8 +11,9 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - if user_signed_in?
-          %li= link_to "My Movies", movies_path, class: "active"
+          %li= link_to "My Movies", movies_path
           %li= link_to "Account", edit_user_registration_path
+          %li= link_to "Favourites", favourites_path
         - else
           %li
             %a.active{href: new_user_registration_path} 

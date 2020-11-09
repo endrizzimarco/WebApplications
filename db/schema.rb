@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_09_001344) do
+ActiveRecord::Schema.define(version: 2020_11_09_064621) do
+
+  create_table "favourites", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "favourited_type"
+    t.integer "favourited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["favourited_type", "favourited_id"], name: "index_favourites_on_favourited_type_and_favourited_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
 
   create_table "movies", force: :cascade do |t|
     t.string "title"

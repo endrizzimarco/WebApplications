@@ -2,35 +2,35 @@
   .container
     .row
       .col-sm-4
-        %img{src: "#{local_assigns[:movie].img_path}", alt: "Poster", class: "img-fluid", style: "padding-top:24px"}
+        %img{src: "#{@movie.img_path}", alt: "Poster", class: "img-fluid", style: "padding-top:24px"}
       .col-sm-8
         %h1
           %strong
-            =local_assigns[:movie].title
-            -if local_assigns[:show]
+            =@movie.title
+            -if @show #???????????????????????
             -else
-              =local_assigns[:data]
-        %h4= local_assigns[:movie].tagline
+              =@createInstance
+        %h4= @movie.tagline
         %br
-        %p= local_assigns[:movie].synopsis
+        %p= @movie.synopsis
         %br
         %p 
           Genre:
-          %strong= local_assigns[:movie].genres
+          %strong= @movie.genres
         %p
           Release Date:
-          %strong= local_assigns[:movie].release_date
+          %strong= @movie.release_date
         %p
           Runtime:
-          %strong= local_assigns[:movie].runtime
+          %strong= @movie.runtime
           %strong minutes
         %p
           Average rating: 
-          %strong= local_assigns[:movie].rating
+          %strong= @movie.rating
         %br
         %p Casts:
         .row
-          -casts = local_assigns[:movie].casts.split(',')
+          -casts = @movie.casts.split(',')
           -i = 0
           -casts.each do |cast|
             -i += 1

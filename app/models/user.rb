@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :movies
+  has_many :favourites
+  has_many :favourite_movies, through: :favourites, source: :favourited, source_type: 'Movie'
 end
