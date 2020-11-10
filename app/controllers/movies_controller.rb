@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_variables
-  before_action :set_movie, only: [:show, :edit, :update, :destroy]
+  before_action :set_movie, only: [:show, :destroy]
   before_action :authenticate_user!, only: [:create]
 
   def home 
@@ -77,6 +77,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.permit(:title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
+      params.permit(:movie_id, :title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
     end
 end
