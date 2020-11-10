@@ -1,6 +1,50 @@
-= render 'shared/moviedetails'
+- @createMovie= link_to 'Add to watchlist', movies_path(id: @movie.id, title: @movie.title, tagline: @movie.tagline, rating: @movie.rating,
+                                genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
+                                runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path), 
+                                method: :post, class: "btn btn-default btn-lg"
 
-- unless current_user.favourite_movies.exists?(id: @movie.id)
-  = link_to 'Add to favourites', favourite_movies_path(movie_id: @movie), method: :post
-- else
-  = link_to 'Remove from favourites', favourite_movie_path(@movie), method: :delete
+.album
+  .container
+    .row
+      .col-sm-4
+        %img{src: "#{@movie.img_path}", alt: "Poster", class: "img-fluid", style: "padding-top:24px"}
+      .col-sm-8
+        %h1
+          %strong
+            =@movie.title
+            -# check whether movie has been saved
+            -if current_user.movies.exists?(id: @movie.id) #DO JQUERY
+              -unless current_user.favourite_movies.exists?(id: @movie.id)
+                = link_to 'Add to favourites', favourite_movies_path(movie_id: @movie), method: :post
+              -else
+                = link_to 'Remove from favourites', favourite_movie_path(@movie), method: :delete
+            -else # save movie
+              =@createMovie
+        %h4= @movie.tagline
+        %br
+        %p= @movie.synopsis
+        %br
+        %p 
+          Genre:
+          %strong= @movie.genres
+        %p
+          Release Date:
+          %strong= @movie.release_date
+        %p
+          Runtime:
+          %strong= @movie.runtime
+          %strong minutes
+        %p
+          Average rating: 
+          %strong= @movie.rating
+        %br
+        %p Casts:
+        .row
+          -casts = @movie.casts.split(',')
+          -i = 0
+          -casts.each do |cast|
+            -i += 1
+            -if i > 27
+              -break
+            .col-sm-4
+              %li= cast

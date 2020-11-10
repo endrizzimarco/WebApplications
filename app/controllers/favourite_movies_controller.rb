@@ -2,7 +2,6 @@ class FavouriteMoviesController < ApplicationController
   before_action :set_movie, except: [:index]
     
   def index
-    @index = true
     @movies = current_user.favourite_movies
   end
   

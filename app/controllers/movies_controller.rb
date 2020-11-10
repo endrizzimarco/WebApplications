@@ -1,6 +1,6 @@
 class MoviesController < ApplicationController
   before_action :set_variables
-  before_action :set_movie, only: [:show, :destroy]
+  before_action :set_movie, only: [:destroy]
   before_action :authenticate_user!, only: [:create]
 
   def home 
@@ -17,20 +17,17 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     if current_user.present?
-      @index = true
       @movies = current_user.movies
     end
   end
 
   def show
-    @show = true
-  end
-
-  # GET /movies/1
-  # GET /movies/1.json
-  def view
-    @movie = MoviePresenter.new(movie_detail).data
-    @movie[:img_path] = "#{@image_path}w400#{@movie.poster_path}"
+    unless current_user.movies.exists?(id: params[:id])
+      @movie = MoviePresenter.new(movie_detail).data
+      @movie[:img_path] = "#{@image_path}w400#{@movie.poster_path}"
+    else
+      set_movie
+    end
   end
 
   # POST /movies
@@ -38,12 +35,10 @@ class MoviesController < ApplicationController
   def create
     @movie = current_user.movies.build(movie_params)
 
-    respond_to do |format|
-      if @movie.save
-        format.html { redirect_to @movie, notice: 'Movie was successfully added to watchlist' }
-      else
-        format.html {  redirect_to @movie, alert: 'Something went wrong :(' }
-      end
+    if @movie.save
+      redirect_to @movie, notice: 'Movied added to watched list' 
+    else
+      redirect_to @movie, alert: 'Something went wrong :(' 
     end
   end
 
@@ -51,9 +46,7 @@ class MoviesController < ApplicationController
   # DELETE /movies/1.json
   def destroy
     @movie.destroy
-    respond_to do |format|
-      format.html { redirect_to movies_url, notice: 'Movie was successfully destroyed.' }
-    end
+      redirect_to movies_url, notice: 'Movie was successfully destroyed.' 
   end
 
   def movie_detail
@@ -77,6 +70,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.permit(:movie_id, :title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
+      params.permit(:id, :title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
     end
 end

@@ -1,6 +1,6 @@
-- @createInstance= link_to 'Add to watchlist', movies_path(title: @movie.title, tagline: @movie.tagline, rating: @movie.rating,
+- @data= link_to 'Add to watchlist', movies_path(id: @movie.id, title: @movie.title, tagline: @movie.tagline, rating: @movie.rating,
                                 genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
                                 runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path), 
-                                method: :post, class: "btn btn-default btn-lg" 
+                                method: :post, class: "btn btn-default btn-lg"
 
 = render 'shared/moviedetails'

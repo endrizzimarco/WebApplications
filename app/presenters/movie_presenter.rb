@@ -5,6 +5,7 @@ class MoviePresenter
 
   def data
     OpenStruct.new(
+      id: @movie['id'],
       title: @movie['original_title'],
       poster_path: @movie['poster_path'],
       genres: @movie['genres'].map { |genre| genre['name'] }.join(' / '),
