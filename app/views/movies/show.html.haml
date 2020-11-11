@@ -1,8 +1,3 @@
-- @createMovie= link_to 'Add to watchlist', movies_path(id: @movie.id, title: @movie.title, tagline: @movie.tagline, rating: @movie.rating,
-                                genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
-                                runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path), 
-                                method: :post, class: "btn btn-default btn-lg"
-
 .album
   .container
     .row
@@ -12,14 +7,16 @@
         %h1
           %strong
             =@movie.title
-            -# check whether movie has been saved
-            -if current_user.movies.exists?(id: @movie.id) #DO JQUERY
-              -unless current_user.favourite_movies.exists?(id: @movie.id)
-                = link_to 'Add to favourites', favourite_movies_path(movie_id: @movie), method: :post
-              -else
-                = link_to 'Remove from favourites', favourite_movie_path(@movie), method: :delete
-            -else # save movie
-              =@createMovie
+            -if not current_user.present?
+            -elsif not current_user.movies.exists?(id: @movie.id)
+              = link_to 'Add to watchlist', movies_path(id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
+                              vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
+                              runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path), 
+                              method: :post, class: "btn btn-default btn-lg"
+            -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
+              = link_to 'Add to favourites', favourite_movies_path(movie_id: @movie), method: :post
+            -else 
+              = link_to 'Remove from favourites', favourite_movie_path(@movie), method: :delete
         %h4= @movie.tagline
         %br
         %p= @movie.synopsis
@@ -36,7 +33,7 @@
           %strong minutes
         %p
           Average rating: 
-          %strong= @movie.rating
+          %strong= @movie.vote_average
         %br
         %p Casts:
         .row

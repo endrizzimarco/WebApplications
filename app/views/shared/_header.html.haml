@@ -11,13 +11,22 @@
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - if user_signed_in?
-          %li= link_to "My Movies", movies_path
-          %li= link_to "Favourites", favourites_path
-          %li= link_to "Account", edit_user_registration_path
+          %li
+            %a.active{href: movies_path}
+              .glyphicon.glyphicon-film
+              Seen Movies
+          %li
+            %a.active{href: favourites_path}
+              .glyphicon.glyphicon-heart-empty
+              Favourites
+          %li
+            %a.active{href: edit_user_registration_path}
+              .glyphicon.glyphicon-user
+              Account
         - else
           %li
             %a.active{href: new_user_registration_path} 
-              %span.glyphicon.glyphicon-user
+              .glyphicon.glyphicon-user
               Sign Up
           %li
             %a.active{href: new_user_session_path} 

@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
-  before_action :set_variables
   before_action :set_movie, only: [:destroy]
   before_action :authenticate_user!, only: [:create]
+  before_action :image_path, only: [:home, :search, :show]
 
   def home 
     @movies = movie_service.popular
@@ -22,12 +22,11 @@ class MoviesController < ApplicationController
   end
 
   def show
-    unless current_user.movies.exists?(id: params[:id])
-      @movie = MoviePresenter.new(movie_detail).data
-      @movie[:img_path] = "#{@image_path}w400#{@movie.poster_path}"
-    else
-      set_movie
-    end
+      unless current_user and current_user.movies.exists?(id: params[:id]) 
+        set_movie_api
+      else
+        set_movie
+      end
   end
 
   # POST /movies
@@ -64,12 +63,17 @@ class MoviesController < ApplicationController
       @movie = Movie.find(params[:id])
     end
 
-    def set_variables
+    def image_path
       @image_path ||= movie_service.configuration.base_url
+    end
+    
+    def set_movie_api
+      @movie = MoviePresenter.new(movie_detail).data
+      @movie[:img_path] = "#{@image_path}w400#{@movie.poster_path}"
     end
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.permit(:id, :title, :tagline, :rating, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
+      params.permit(:id, :title, :tagline, :vote_average, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
     end
 end

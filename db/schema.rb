@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2020_11_09_064621) do
 
   create_table "movies", force: :cascade do |t|
     t.string "title"
-    t.decimal "rating"
+    t.decimal "vote_average"
     t.string "genres"
     t.string "casts"
     t.text "synopsis"

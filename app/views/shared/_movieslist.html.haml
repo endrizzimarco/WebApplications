@@ -5,9 +5,12 @@
         .thumbnail
           %a{href: "/movies/#{movie.id}"}
             -# View for saved movies (my movies, favourites)
-            -if current_page?(action: 'index')  || current_page?('/favourites')
+            -if action_name == 'index'
               %img{src: "#{movie.img_path}", alt: "Poster"}
               %td= link_to 'Show', movie
               %td= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }
             -else # View for non-saved movies (homepage, search)
-              %img{src: "#{@image_path}w780#{movie.poster_path}", alt: "Poster"}
+              %img{src: "#{@image_path}w300_and_h450_bestv2#{movie.poster_path}", alt: "Poster"}
+          %h5 
+            Average vote:           
+            %span.badge.badge_default= "#{movie.vote_average}/10"
