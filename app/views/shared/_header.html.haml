@@ -23,6 +23,10 @@
             %a.active{href: edit_user_registration_path}
               .glyphicon.glyphicon-user
               Account
+          %li
+            %a.active{href: destroy_user_session_path}
+              .glyphicon.glyphicon-log-out
+              Log out
         - else
           %li
             %a.active{href: new_user_registration_path} 

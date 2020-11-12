@@ -22,7 +22,8 @@ ActiveRecord::Schema.define(version: 2020_11_09_064621) do
     t.index ["user_id"], name: "index_favourites_on_user_id"
   end
 
-  create_table "movies", force: :cascade do |t|
+  create_table "movies", id: false, force: :cascade do |t|
+    t.integer "id"
     t.string "title"
     t.decimal "vote_average"
     t.string "genres"

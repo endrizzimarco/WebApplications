@@ -2,15 +2,17 @@
   -unless @movies.nil?
     -@movies.each do |movie|
       .col-sm-2.col-md-3
-        .thumbnail
+        .thumbnail.img-responsive
           %a{href: "/movies/#{movie.id}"}
             -# View for saved movies (my movies, favourites)
             -if action_name == 'index'
               %img{src: "#{movie.img_path}", alt: "Poster"}
               %td= link_to 'Show', movie
               %td= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }
-            -else # View for non-saved movies (homepage, search)
+            -elsif movie.poster_path
               %img{src: "#{@image_path}w300_and_h450_bestv2#{movie.poster_path}", alt: "Poster"}
+            -else # View for non-saved movies (homepage, search)
+              %img{src: "https://via.placeholder.com/300x450", alt: "Poster"}
           %h5 
             Average vote:           
             %span.badge.badge_default= "#{movie.vote_average}/10"
