@@ -17,7 +17,7 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def index
     if current_user.present?
-      @movies = current_user.movies
+      @movies = current_user.movies.order("id")
     end
   end
 
@@ -44,6 +44,9 @@ class MoviesController < ApplicationController
   # DELETE /movies/1
   # DELETE /movies/1.json
   def destroy
+    if current_user.favourite_movies.exists?(id: @movie.id)
+      Favourite.where(favourited_id: @movie.id, user_id: current_user.id).first.destroy
+    end
     @movie.destroy
       redirect_to movies_url, notice: 'Movie was successfully destroyed.' 
   end

@@ -9,6 +9,7 @@
               %img{src: "#{movie.img_path}", alt: "Poster"}
               %td= link_to 'Show', movie
               %td= link_to 'Destroy', movie, method: :delete, data: { confirm: 'Are you sure?' }
+              -# = link_to 'Remove from favourites', favourite_movie_path(movie), method: :delete
             -elsif movie.poster_path
               %img{src: "#{@image_path}w300_and_h450_bestv2#{movie.poster_path}", alt: "Poster"}
             -else # View for non-saved movies (homepage, search)
