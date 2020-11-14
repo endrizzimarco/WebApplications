@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:destroy]
   before_action :authenticate_user!, only: [:create]
-  before_action :image_path, only: [:home, :search, :show]
+  before_action :image_path, only: [:home, :search, :show, :create]
 
   def home 
     @movies = movie_service.popular
@@ -23,7 +23,8 @@ class MoviesController < ApplicationController
 
   def show
       unless current_user and current_user.movies.exists?(id: params[:id]) 
-        set_movie_api
+        @movie = MoviePresenter.new(movie_detail).data
+        @movie[:img_path] = "#{@root_path}w400#{@movie.poster_path}"
       else
         set_movie
       end
@@ -32,12 +33,16 @@ class MoviesController < ApplicationController
   # POST /movies
   # POST /movies.json
   def create
-    @movie = current_user.movies.build(movie_params)
+    set_movie_api 
 
-    if @movie.save
-      redirect_to @movie, notice: 'Movied added to watched list' 
+    @newmovie = current_user.movies.build(id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
+            vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
+            runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path)
+
+    if @newmovie.save
+      redirect_to @newmovie, notice: 'Movied added to watched list' 
     else
-      redirect_to @movie, alert: 'Something went wrong :(' 
+      redirect_to @newmovie, alert: 'Something went wrong :(' 
     end
   end
 
@@ -49,10 +54,6 @@ class MoviesController < ApplicationController
     end
     @movie.destroy
       redirect_to movies_url, notice: 'Movie was successfully destroyed.' 
-  end
-
-  def movie_detail
-    movie_service.movie_detail(params[:id])
   end
 
   def movie_service
@@ -67,16 +68,15 @@ class MoviesController < ApplicationController
     end
 
     def image_path
-      @image_path ||= movie_service.configuration.base_url
-    end
-    
-    def set_movie_api
-      @movie = MoviePresenter.new(movie_detail).data
-      @movie[:img_path] = "#{@image_path}w400#{@movie.poster_path}"
+      @root_path ||= movie_service.configuration.base_url
     end
 
-    # Only allow a list of trusted parameters through.
-    def movie_params
-      params.permit(:id, :title, :tagline, :vote_average, :genres, :casts, :synopsis, :runtime, :release_date, :img_path)
+    def movie_detail
+      movie_service.movie_detail(params[:id])
+    end
+
+    def set_movie_api
+      @movie = MoviePresenter.new(movie_detail).data
+      @movie[:img_path] = "#{@root_path}w400#{@movie.poster_path}"
     end
 end

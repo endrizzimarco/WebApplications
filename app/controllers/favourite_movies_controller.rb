@@ -2,7 +2,7 @@ class FavouriteMoviesController < ApplicationController
   before_action :set_movie, except: [:index]
     
   def index
-    @movies = current_user.favourite_movies
+    @movies = current_user.favourite_movies.where(user_id: current_user.id)
   end
   
   def create
