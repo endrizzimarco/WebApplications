@@ -4,7 +4,7 @@
       .col-sm-4
         %img.img-fluid{src: @movie.img_path, alt: "Poster"}
       .col-sm-8
-        %h1#title
+        %h1#title.textborder
           = @movie.title
           -if not current_user.present?
           -elsif not current_user.movies.exists?(id: @movie.id)
@@ -14,7 +14,7 @@
             %span= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty'
           -else 
             %span= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star'
-        %h4= @movie.tagline
+        %h4.textborder= @movie.tagline
         %br
         #addmovie{hidden: ""}
           = form_with url: movies_path do |f|
@@ -22,7 +22,7 @@
               =hidden_field_tag 'id', @movie.id
               %input.btn.btn-default{type: 'submit', value: 'Submit rating'}
         %br
-        %p= @movie.synopsis
+        %p.textborder= @movie.synopsis
         %br
         %p 
           Genre:
@@ -56,6 +56,8 @@
         %a#show Show more
 
 :javascript
+
+  // Star rating plugin by Washington Botelho
   $('#rating').raty({
     path: '/assets/',
     half: true,
@@ -64,18 +66,22 @@
     scoreName: 'user_rating'
   });
 
-  $("#button").click(function(){
-    $("#addmovie").toggle();
-    $("#button").toggle();
+  // Makes raty stars appear on button click
+  $(document).ready(function(){
+    $("#button").click(function(){
+      $("#addmovie").toggle();
+      $("#button").toggle();
+    })
   });
 
-  $("#show").click(function(){
-    if ($("#show").html() == "Show less") {
-      var text = "Show more"
-    }
-    else {
+  // Handles show more/less cast
+  $(document).ready(function(){
+    $("#show").click(function(){
       var text = "Show less"
-    }
-    $(".cast").toggle();
-    $("#show").html(text)
+      if ($(this).html() == "Show less") {
+        var text = "Show more"
+      }
+      $(".cast").toggle();
+      $(this).html(text);
+    })
   });

@@ -1,5 +1,13 @@
-// styles for views with movie albums
+// _header.html.haml
+#current {
+  background-color:#3f3f3f;
 
+  &:hover {
+  background-color:#3f3f3f;
+  }
+}
+
+//_movielist.html.haml
 a {
   img {  
     width: 100%;
@@ -11,6 +19,7 @@ a {
   }
 }
 
+//_footer.html.haml
 footer {
   position: relative;
   margin-top: -60px; // negative value of footer height 
@@ -18,4 +27,14 @@ footer {
   clear:both;
   padding-top:20px;
   background-color: #101010;
+  
+  #dark-toggle {
+    cursor: pointer;
+    margin-right: 20px;
+  }
+
+  a:visited {
+    color:#337ab7;
+  }
 } 
+

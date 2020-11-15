@@ -7,38 +7,49 @@
         %span.icon-bar
         %span.icon-bar
       = link_to "MyMovieList", root_path, class: "navbar-brand"
-    / Collect the nav links, forms, and other content for toggling
+    -# Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
         - if user_signed_in?
           %li
-            %a.active{href: movies_path}
+            %a{href: movies_path}
               .glyphicon.glyphicon-film
               Seen Movies
           %li
-            %a.active{href: favourite_movies_path}
+            %a{href: favourite_movies_path}
               .glyphicon.glyphicon-heart-empty
               Favourites
           %li
-            %a.active{href: edit_user_registration_path}
+            %a{href: edit_user_registration_path}
               .glyphicon.glyphicon-user
               Account
           %li
-            %a.active{href: destroy_user_session_path}
+            %a{href: destroy_user_session_path}
               .glyphicon.glyphicon-log-out
               Log out
         - else
           %li
-            %a.active{href: new_user_registration_path} 
+            %a{href: new_user_registration_path} 
               .glyphicon.glyphicon-user
               Sign Up
           %li
-            %a.active{href: new_user_session_path} 
+            %a{href: new_user_session_path} 
               %span.glyphicon.glyphicon-log-in
               Log In
       = form_tag("/search", method: "get", class: "navbar-form navbar-right", role: "search") do
         .form-group
           = text_field_tag(:q, "", class: "form-control", placeholder: "Search movies")
         = submit_tag("Submit", class: "btn btn-default")
-    / /.navbar-collapse
-  / /.container-fluid
+    -# navbar-collapse
+  -# container-fluid
+
+
+-# Active view 
+:javascript
+  var loc = window.location.pathname;
+
+  $('.navbar-nav li').find('a').each(function() {
+    if ($(this).attr('href') == loc) {
+      $(this).prop('id', 'current');
+    }
+  });

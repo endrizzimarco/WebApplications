@@ -23,15 +23,13 @@ class MoviesController < ApplicationController
 
   def show
       unless current_user and current_user.movies.exists?(id: params[:id]) 
-        @movie = MoviePresenter.new(movie_detail).data
-        @movie[:img_path] = "#{@root_path}w400#{@movie.poster_path}"
+        set_movie_api
       else
         set_movie
       end
   end
 
   # POST /movies
-  # POST /movies.json
   def create
     set_movie_api 
 

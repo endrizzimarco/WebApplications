@@ -1,7 +1,7 @@
 .row
   -@movies.each do |movie|
     .col-sm-2.col-md-3
-      .thumbnail.img-responsive
+      #thumbnail.thumbnail.img-responsive
         -if action_name == 'index' # View for saved movies (my movies, favourites)
           %a{href: "/movies/#{movie.id}"}
             %img{src: movie.img_path, alt: "Poster", title: movie.title}

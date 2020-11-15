@@ -14,5 +14,7 @@
     = render partial: 'shared/header'
     #wrap
       #main.container-fluid
+        - flash.each do |name, msg|
+          = content_tag(:div, msg, class: "alert alert-info")
         = yield
     = render partial: 'shared/footer'

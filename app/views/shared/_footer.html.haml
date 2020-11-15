@@ -1,5 +1,19 @@
 %footer.text-muted
-    .container-fluid
-        %p.pull-right
-            %a{href: "#"} Back to top
-        %p COM2025 University of Surrey Project
+  .container-fluid
+    %p.pull-right
+      %a#dark-toggle Dark Theme
+      %a{href: "#"} Back to top
+    %p COM2025 University of Surrey Project
+
+:javascript
+  // Handles light/dark mode toggle
+  $(document).ready(function(){
+    $("#dark-toggle").click(function(){
+      var text = "Light Theme"
+      if ($(this).html() == "Light Theme") {
+        var text = "Dark Theme"
+      }
+      $("body").toggleClass('dark-theme');
+      $(this).html(text);
+    })
+  });
