@@ -1,3 +1,21 @@
-img {  
-    width: 100%
+// styles for views with movie albums
+
+a {
+  img {  
+    width: 100%;
+
+    &:hover {
+      opacity: 0.85;
+      filter: alpha(opacity=85);
+    }
+  }
 }
+
+footer {
+  position: relative;
+  margin-top: -60px; // negative value of footer height 
+  height: 60px;
+  clear:both;
+  padding-top:20px;
+  background-color: #101010;
+} 

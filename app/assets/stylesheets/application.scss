@@ -16,9 +16,23 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+html, body {
+    height:100%;
+}
+
+#wrap {
+    min-height: 100%
+}
+
+#main {
+    overflow:auto;
+    padding-bottom:80px;
+}
+
 body { 
     padding-top: 65px; 
     font-family: -apple-system, BlinkMacSystemFont, Helvetica, "Segoe UI", Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    position: relative;
 }
 
 

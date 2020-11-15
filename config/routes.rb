@@ -5,5 +5,4 @@ Rails.application.routes.draw do
 
   root 'movies#home'
   get 'search' => 'movies#search'
-  get 'favourites' => 'favourite_movies#index'
 end

@@ -2,43 +2,80 @@
   .container
     .row
       .col-sm-4
-        %img{src: "#{@movie.img_path}", alt: "Poster", class: "img-fluid", style: "padding-top:24px"}
+        %img.img-fluid{src: @movie.img_path, alt: "Poster"}
       .col-sm-8
-        %h1
-          %strong
-            =@movie.title
-            -if not current_user.present?
-            -elsif not current_user.movies.exists?(id: @movie.id)
-              =  link_to "Add to seen list", movies_path(id: @movie.id), method: :post, class: 'btn btn-default btn-lg'
-            -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
-              = link_to 'Add to favourites', favourite_movies_path(movie_id: @movie), method: :post
-            -else 
-              = link_to 'Remove from favourites', favourite_movie_path(@movie), method: :delete
+        %h1#title
+          = @movie.title
+          -if not current_user.present?
+          -elsif not current_user.movies.exists?(id: @movie.id)
+            %button#button.btn.btn-default.btn-lg
+              Add to seen list
+          -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
+            %span= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty'
+          -else 
+            %span= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star'
         %h4= @movie.tagline
+        %br
+        #addmovie{hidden: ""}
+          = form_with url: movies_path do |f|
+            #rating
+              =hidden_field_tag 'id', @movie.id
+              %input.btn.btn-default{type: 'submit', value: 'Submit rating'}
         %br
         %p= @movie.synopsis
         %br
         %p 
           Genre:
-          %strong= @movie.genres
+          %span.badge.alert-info= "#{@movie.genres}"
         %p
           Release Date:
-          %strong= @movie.release_date
+          %span.badge.alert-warning= "#{@movie.release_date}"
         %p
           Runtime:
-          %strong= @movie.runtime
-          %strong minutes
+          %span.badge.alert-danger= "#{@movie.runtime} minutes"
         %p
           Average rating: 
-          %strong= @movie.vote_average
+          %span.badge= "#{@movie.vote_average} / 10"
+        -if not current_user.present?
+        -elsif current_user.movies.exists?(id: @movie.id)
+          %p
+            Your rating:
+            %span.badge.alert-success= "#{@movie.user_rating} / 10"
         %br
-        %p Casts:
+        %p Cast:
         .row
           -casts = @movie.casts.split(',')
           -i = 0
           -casts.each do |cast|
             -i += 1
-            -if i > 27
-              -break
             .col-sm-4
-              %li= cast
+              -if i < 10
+                %li= cast
+              -else 
+                %li.cast{hidden: ""}= cast
+        %a#show Show more
+
+:javascript
+  $('#rating').raty({
+    path: '/assets/',
+    half: true,
+    number: 10,
+    space: false,
+    scoreName: 'user_rating'
+  });
+
+  $("#button").click(function(){
+    $("#addmovie").toggle();
+    $("#button").toggle();
+  });
+
+  $("#show").click(function(){
+    if ($("#show").html() == "Show less") {
+      var text = "Show more"
+    }
+    else {
+      var text = "Show less"
+    }
+    $(".cast").toggle();
+    $("#show").html(text)
+  });

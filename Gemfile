@@ -62,7 +62,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # jquery dependencies
-gem 'jquery-rails', '~> 4.3', '>= 4.3.3'
+gem 'jquery-rails'
 
 # For users and authentication
 gem 'devise'

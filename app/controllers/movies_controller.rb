@@ -37,7 +37,7 @@ class MoviesController < ApplicationController
 
     @newmovie = current_user.movies.build(id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
-            runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path)
+            runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
       redirect_to @newmovie, notice: 'Movied added to watched list' 
