@@ -1,13 +1,29 @@
 %footer.text-muted
   .container-fluid
-    %p.pull-right
-      %a#dark-toggle Dark Theme
-      %a{href: "#"} Back to top
-    %p COM2025 University of Surrey Project
+    .row
+      .col-sm-3
+        %h4.text-white About
+        %p Marco Endrizzi's project for COM2025 University of Surrey
+      .col-sm-2
+        %h4.text-white Resources used 
+        %p 
+          Movie data from 
+          =link_to("themoviedb", "https://www.themoviedb.org/")
+      .col-sm-4
+        %h4.text-white Disclaimer
+        %p "This product uses the TMDb API but is not endorsed or certified by TMDb."
+      .col-sm-1
+        %h4.text-white Code
+        =link_to("GitLab", "https://gitlab.eps.surrey.ac.uk/me00531/me00531_com2025_project")
+      .col-sm-2
+        %br
+        %p.pull-right
+          %a#dark-toggle.text-white.text-muted Dark Theme
+          %a.text-white{href: "#"} Back to top
 
 :javascript
   // Remember theme every time page loads 
-  // Sadly jquery is too slow so has to be vanilla js
+  // Vanilla js should be faster for this
   if (localStorage.getItem("theme") === "false") {
     document.getElementsByTagName("body")[0].classList.toggle('dark-theme');
     document.getElementById("dark-toggle").innerHTML = "Light Theme"
