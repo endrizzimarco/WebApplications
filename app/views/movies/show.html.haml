@@ -6,14 +6,15 @@
       .col-sm-8
         %h1#title.textborder
           = @movie.title
+          -# Registered user only features
           -if not current_user.present?
           -elsif not current_user.movies.exists?(id: @movie.id)
             %button#button.btn.btn-default.btn-lg
               Add to seen list
-          -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
-            %span= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty'
+          -elsif not current_user.favourite_movies.exists?(movie_id: @movie.movie_id) 
+            %span= link_to '', favourite_movies_path(id: @movie.movie_id), method: :post, class: 'glyphicon glyphicon-star-empty'
           -else 
-            %span= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star'
+            %span= link_to '', favourite_movie_path(id: @movie.movie_id), method: :delete, class: 'glyphicon glyphicon-star'
         %h4.textborder= @movie.tagline
         %br
         #addmovie{hidden: ""}
@@ -36,8 +37,7 @@
         %p
           Average rating: 
           %span.badge= "#{@movie.vote_average} / 10"
-        -if not current_user.present?
-        -elsif current_user.movies.exists?(id: @movie.id)
+        -if Movie.exists?(id: @movie.id)
           %p
             Your rating:
             %span.badge.alert-success= "#{@movie.user_rating} / 10"

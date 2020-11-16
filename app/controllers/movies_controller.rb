@@ -1,12 +1,15 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:destroy]
+  before_action :set_movie_api, only: [:show, :create]
   before_action :authenticate_user!, only: [:create]
-  before_action :image_path, only: [:home, :search, :show, :create]
+  before_action :image_path
 
+  # GET root
   def home 
     @movies = movie_service.popular
   end
 
+  # GET /search
   def search
     if params[:q].present?
       @movies = movie_service.find(params[:q])
@@ -14,67 +17,64 @@ class MoviesController < ApplicationController
   end
 
   # GET /movies
-  # GET /movies.json
   def index
-    if current_user.present?
-      @movies = current_user.movies.order("id")
-    end
+    @movies = current_user.movies.order("id")
   end
 
+  # GET /movies/:id  where :id represents the id of the movie in the API
   def show
-      unless current_user and current_user.movies.exists?(id: params[:id]) 
-        set_movie_api
-      else
+      # Shows API data if not saved, otherwise show movies table data
+      if current_user and current_user.movies.exists?(movie_id: params[:id]) 
         set_movie
       end
   end
 
   # POST /movies
   def create
-    set_movie_api 
-
-    @newmovie = current_user.movies.build(id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
+    # Save the movie api data and the rating into the movies table
+    @newmovie = current_user.movies.build(movie_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
-      redirect_to @newmovie, notice: 'Movied added to watched list' 
+      redirect_back(fallback_location:"/", notice: 'Movied added to watched list')
     else
-      redirect_to @newmovie, alert: 'Something went wrong :(' 
+      redirect_back(fallback_location:"/", alert: 'Something went wrong :(')
     end
   end
 
-  # DELETE /movies/1
-  # DELETE /movies/1.json
+  # DELETE /movies/:id  where :id represents the primary key of the saved movie
   def destroy
-    if current_user.favourite_movies.exists?(id: @movie.id)
-      Favourite.where(favourited_id: @movie.id, user_id: current_user.id).first.destroy
-    end
     @movie.destroy
-      redirect_to movies_url, notice: 'Movie was successfully destroyed.' 
-  end
-
-  def movie_service
-    @movie_service ||= MovieDbService.new
+      redirect_to movies_url, notice: 'Movie was successfully removed' 
   end
 
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Sets the movie to show or delete
     def set_movie
-      @movie = Movie.find(params[:id])
+      @movie = current_user.movies.where(movie_id: params[:id]).first
     end
 
+    # themoviedb API connection and commands
+    def movie_service
+      @movie_service ||= MovieDbService.new
+    end  
+    
+    # Sets root path for poster images
     def image_path
       @root_path ||= movie_service.configuration.base_url
-    end
+    end 
 
+    # Fetch data of a movie from the api based on id
     def movie_detail
       movie_service.movie_detail(params[:id])
     end
 
+    # @movie attributes are now the same for saved movies, .popular
+    # movies and .find movies
     def set_movie_api
       @movie = MoviePresenter.new(movie_detail).data
-      @movie[:img_path] = "#{@root_path}w400#{@movie.poster_path}"
+      @movie[:img_path] = "#{image_path}w400#{@movie.poster_path}"
     end
 end
