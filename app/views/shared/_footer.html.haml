@@ -6,14 +6,29 @@
     %p COM2025 University of Surrey Project
 
 :javascript
+  // Remember theme every time page loads
+  if (localStorage.getItem("theme") === "false") {
+    $("body").toggleClass('dark-theme');
+    $("#dark-toggle").html("Light Theme")
+    }
+
   // Handles light/dark mode toggle
   $(document).ready(function(){
     $("#dark-toggle").click(function(){
-      var text = "Light Theme"
       if ($(this).html() == "Light Theme") {
-        var text = "Dark Theme"
+        text = "Dark Theme"
+        light = true
+      } 
+      else {
+        text = "Light Theme"
+        light = false
       }
+
+      localStorage.setItem("theme", light)
       $("body").toggleClass('dark-theme');
       $(this).html(text);
     })
   });
+
+
+

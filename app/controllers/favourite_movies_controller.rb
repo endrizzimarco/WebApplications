@@ -20,6 +20,6 @@ class FavouriteMoviesController < ApplicationController
   
   private
     def set_movie
-      @movie = current_user.movies.where(movie_id: params[:id]).first
+      @movie = current_user.movies.where(api_id: params[:id]).first
     end
 end

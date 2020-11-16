@@ -11,17 +11,17 @@
           -elsif not current_user.movies.exists?(id: @movie.id)
             %button#button.btn.btn-default.btn-lg
               Add to seen list
-          -elsif not current_user.favourite_movies.exists?(movie_id: @movie.movie_id) 
-            %span= link_to '', favourite_movies_path(id: @movie.movie_id), method: :post, class: 'glyphicon glyphicon-star-empty'
+          -elsif not current_user.favourite_movies.exists?(api_id: @movie.api_id) 
+            %span= link_to '', favourite_movies_path(id: @movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty'
           -else 
-            %span= link_to '', favourite_movie_path(id: @movie.movie_id), method: :delete, class: 'glyphicon glyphicon-star'
+            %span= link_to '', favourite_movie_path(id: @movie.api_id), method: :delete, class: 'glyphicon glyphicon-star'
         %h4.textborder= @movie.tagline
         %br
-        #addmovie{hidden: ""}
+        #addmovie{hidden: ''}
           = form_with url: movies_path do |f|
             #rating
               =hidden_field_tag 'id', @movie.id
-              %input.btn.btn-default{type: 'submit', value: 'Submit rating'}
+              %input#submit.btn.btn-default{type: 'submit', value: 'Submit rating'}
         %br
         %p.textborder= @movie.synopsis
         %br
@@ -52,8 +52,9 @@
               -if i < 10
                 %li= cast
               -else 
-                %li.cast{hidden: ""}= cast
-        %a#show Show more
+                %li.morecast{hidden: ''}= cast
+        -if i > 10
+          %a#show Show more
 
 :javascript
 
@@ -74,6 +75,13 @@
     })
   });
 
+  // Form disappears to prevent multiple sumbits while loading
+  $(document).ready(function(){
+    $("#submit").click(function(){
+      $("#addmovie").toggle();
+    })
+  });
+
   // Handles show more/less cast
   $(document).ready(function(){
     $("#show").click(function(){
@@ -81,7 +89,7 @@
       if ($(this).html() == "Show less") {
         var text = "Show more"
       }
-      $(".cast").toggle();
+      $(".morecast").toggle();
       $(this).html(text);
     })
   });

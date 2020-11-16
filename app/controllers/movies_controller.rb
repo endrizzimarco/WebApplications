@@ -24,7 +24,7 @@ class MoviesController < ApplicationController
   # GET /movies/:id  where :id represents the id of the movie in the API
   def show
       # Shows API data if not saved, otherwise show movies table data
-      if current_user and current_user.movies.exists?(movie_id: params[:id]) 
+      if current_user and current_user.movies.exists?(api_id: params[:id]) 
         set_movie
       end
   end
@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
   # POST /movies
   def create
     # Save the movie api data and the rating into the movies table
-    @newmovie = current_user.movies.build(movie_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
+    @newmovie = current_user.movies.build(api_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
@@ -53,7 +53,7 @@ class MoviesController < ApplicationController
   private
     # Sets the movie to show or delete
     def set_movie
-      @movie = current_user.movies.where(movie_id: params[:id]).first
+      @movie = current_user.movies.where(api_id: params[:id]).first
     end
 
     # themoviedb API connection and commands
