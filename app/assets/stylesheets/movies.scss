@@ -14,3 +14,20 @@
 #show:hover {
   cursor: pointer;
 }
+
+.star {
+  color: rgb(255, 200, 0);
+  
+  &:hover {
+    color: rgb(255, 200, 0);
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: rgb(255, 200, 0);
+  }
+}
+
+.synopsis {
+  font-size: 110%;
+}

@@ -19,6 +19,19 @@ a {
   }
 }
 
+.remove {
+  color: rgb(170, 1, 1);
+
+  &:hover {
+    color: rgb(170, 1, 1);
+    text-decoration: none;
+  }
+
+  &:visited {
+    color: rgb(170, 1, 1);
+  }
+}
+
 //_footer.html.haml
 footer {
   position: relative;
@@ -31,10 +44,6 @@ footer {
   #dark-toggle {
     cursor: pointer;
     margin-right: 20px;
-  }
-
-  a:visited {
-    color:#337ab7;
   }
 } 
 

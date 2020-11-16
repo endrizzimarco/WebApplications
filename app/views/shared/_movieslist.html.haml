@@ -9,13 +9,13 @@
             Your vote:
             %span.badge.alert-success= "#{movie.user_rating} / 10"
           %h3
-            %td= link_to '', movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-remove', 
+            %td= link_to '', movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-remove remove', 
                               data: {confirm: 'Are you sure you want to remove this movie from your watched list?'}
             -if current_user.favourite_movies.exists?(api_id: movie.api_id) 
-              %td= link_to '', favourite_movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-star',
+              %td= link_to '', favourite_movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-star star',
                               data: {confirm: 'Are you sure you want to remove this movie from your favourites?'}
             -else 
-              %td= link_to '', favourite_movies_path(id: movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty'
+              %td= link_to '', favourite_movies_path(id: movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty star'
         -else # View for non-saved movies (homepage, search)
           %a{href: "/movies/#{movie.id}"}
             -if movie.poster_path 

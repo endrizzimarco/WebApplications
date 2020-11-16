@@ -12,9 +12,9 @@
             %button#button.btn.btn-default.btn-lg
               Add to seen list
           -elsif not current_user.favourite_movies.exists?(api_id: @movie.api_id) 
-            %span= link_to '', favourite_movies_path(id: @movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty'
+            %span= link_to '', favourite_movies_path(id: @movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty star'
           -else 
-            %span= link_to '', favourite_movie_path(id: @movie.api_id), method: :delete, class: 'glyphicon glyphicon-star'
+            %span= link_to '', favourite_movie_path(id: @movie.api_id), method: :delete, class: 'glyphicon glyphicon-star star'
         %h4.textborder= @movie.tagline
         %br
         #addmovie{hidden: ''}
@@ -23,7 +23,7 @@
               =hidden_field_tag 'id', @movie.id
               %input#submit.btn.btn-default{type: 'submit', value: 'Submit rating'}
         %br
-        %p.textborder= @movie.synopsis
+        %p.textborder.synopsis= @movie.synopsis
         %br
         %p 
           Genre:

@@ -31,6 +31,11 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
+    # Fix for missing posters
+    if @movie.img_path == (@root_path + "w400")
+      @movie.img_path = "https://via.placeholder.com/400x560?text=#{@movie.title}"
+    end
+
     # Save the movie api data and the rating into the movies table
     @newmovie = current_user.movies.build(api_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,

@@ -6,11 +6,12 @@
     %p COM2025 University of Surrey Project
 
 :javascript
-  // Remember theme every time page loads
+  // Remember theme every time page loads 
+  // Sadly jquery is too slow so has to be vanilla js
   if (localStorage.getItem("theme") === "false") {
-    $("body").toggleClass('dark-theme');
-    $("#dark-toggle").html("Light Theme")
-    }
+    document.getElementsByTagName("body")[0].classList.toggle('dark-theme');
+    document.getElementById("dark-toggle").innerHTML = "Light Theme"
+  }
 
   // Handles light/dark mode toggle
   $(document).ready(function(){
@@ -23,12 +24,10 @@
         text = "Light Theme"
         light = false
       }
-
+      // Set theme in local storage
       localStorage.setItem("theme", light)
       $("body").toggleClass('dark-theme');
       $(this).html(text);
     })
   });
-
-
 

@@ -1,4 +1,7 @@
-- if @movies.present?
-  = render partial: 'shared/movieslist'
-- else
-  %h1.jumbotron No movies added yet!
+- unless @movies.present?
+  .jumbotron.jumbodark 
+    %h2 No movies added yet!
+    Search for any movie now and add them by clicking the button and giving them a rating!
+
+= render partial: 'shared/movieslist'
+
