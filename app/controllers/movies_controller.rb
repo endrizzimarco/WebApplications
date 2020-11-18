@@ -68,7 +68,7 @@ class MoviesController < ApplicationController
     
     # Sets root path for poster images
     def image_path
-      @root_path ||= movie_service.configuration.base_url
+      @root_path ||= movie_service.configuration.secure_base_url
     end 
 
     # Fetch data of a movie from the api based on id
