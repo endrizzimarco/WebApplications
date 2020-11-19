@@ -5,4 +5,5 @@ Rails.application.routes.draw do
 
   root 'movies#home'
   get 'search' => 'movies#search'
+  get 'contact' => 'contact#contact'
 end
