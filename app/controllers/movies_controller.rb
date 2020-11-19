@@ -32,7 +32,7 @@ class MoviesController < ApplicationController
   # POST /movies
   def create
     # Fix for missing posters
-    if @movie.img_path == (@root_path + "w400")
+    if @movie.img_path == (@root_path + 'w400')
       @movie.img_path = "https://via.placeholder.com/400x560?text=#{@movie.title}"
     end
 
@@ -42,9 +42,9 @@ class MoviesController < ApplicationController
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
-      redirect_back(fallback_location:"/", notice: 'Movied added to watched list')
+      redirect_back fallback_location:"/", notice: 'Movied added to watched list'
     else
-      redirect_back(fallback_location:"/", alert: 'Something went wrong :(')
+      redirect_back fallback_location:"/", alert: 'Something went wrong :('
     end
   end
 
