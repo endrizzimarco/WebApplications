@@ -3,25 +3,27 @@
     .col-sm-2.col-md-3
       #thumbnail.thumbnail.img-responsive
         -if action_name == 'index' # View for saved movies (my movies, favourites)
-          %a{href: "/movies/#{movie.api_id}"}
-            %img{src: movie.img_path, alt: "Poster", title: movie.title}
+          %a{href: "/movies/#{movie.api_id}"} 
+            %img{src: movie.img_path, alt: 'Poster', title: movie.title}
           %h4
-            Your vote:
+            = t('.userRating')
             %span.badge.alert-success= "#{movie.user_rating} / 10"
           %h3
+            -# X glyphicon to remove saved movies
             %td= link_to '', movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-remove remove', 
-                              data: {confirm: 'Are you sure you want to remove this movie from your watched list?'}
-            -if current_user.favourite_movies.exists?(api_id: movie.api_id) 
-              %td= link_to '', favourite_movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-star star',
-                              data: {confirm: 'Are you sure you want to remove this movie from your favourites?'}
+                              data: {confirm: t('.removeMovie')}
+            -# On/off star for adding favourite movies
+            -if current_user.favourite_movies.exists?(id: movie.id) 
+              %td= link_to '', favourite_movie_path(id: movie.id), method: :delete, class: 'glyphicon glyphicon-star star',
+                              data: {confirm: t('.removeFavourite')}
             -else 
-              %td= link_to '', favourite_movies_path(id: movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty star'
+              %td= link_to '', favourite_movies_path(id: movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
         -else # View for non-saved movies (homepage, search)
           %a{href: "/movies/#{movie.id}"}
-            -if movie.poster_path 
-              %img{src: "#{@root_path}w300_and_h450_bestv2#{movie.poster_path}", alt: "Poster", title: movie.title}
+            -if movie.poster_path # Load API poster 
+              %img{src: "#{@root_path}w300_and_h450_bestv2#{movie.poster_path}", alt: 'Poster', title: movie.title}
             -else # If poster is missing use a placeholder
-              %img{src: "https://via.placeholder.com/300x450?text=#{movie.title}", alt: "Poster", title: movie.title}
-          %h4
-            Average vote:           
+              %img{src: "https://via.placeholder.com/300x450?text=#{movie.title}", alt: 'Poster', title: movie.title}
+          %h4 
+            = t('.apiRating')
             %span.badge= "#{movie.vote_average} / 10"

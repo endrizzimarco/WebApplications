@@ -38,5 +38,61 @@ en:
       title: MyMovieList
   
   movies:
+    home:
+      signUp: Sign up 
+      header: now to keep track of the movies you've watched...
+      tagline: And remember the best ones!
+
+    index:
+      header: No movies added yet!
+      tagline: Search for any movie now and add them by clicking the button and giving them a rating!
+
+    show: 
+      addMovie: Add to seen list
+      submit: Submit rating
+      showMore: Show more
+      minutes: ' minutes'
+      genre: 'Genre:'
+      releaseDate: 'Release Date:'
+      runtime: 'Runtime:'
+      averageRating: 'Average rating:'
+      yourRating: 'Your rating:'
+      cast: 'Cast:'
+
+  favourite_movies:
+    index:
+      header: No favourite movies added yet!
+      tagline: Favourite a movie by clicking the star after you add it!
 
   shared:
+    header:
+      title: MyMovieList
+      toggleNavigation: Toggle Navigation
+      seenMovies: Seen Movies
+      favourites: Favourites
+      account: Account
+      logOut: Log Out
+      signUp: Sign Up
+      logIn: Log In
+      submit: Search
+      searchMovies: Search movies
+
+    movieslist: 
+      userRating: 'Your vote:'
+      apiRating: 'Average vote:'
+      removeMovie: Are you sure you want to remove this movie from your watched lists?
+      removeFavourite: Are you sure you want to remove this movie from your favourites?
+
+    footer:
+      about: About
+      aboutContent: Marco Endrizzi's project for COM2025 University of Surrey
+      resources: Resources used 
+      resourcesContent: Movie data from 
+      moviedb: themoviedb
+      disclaimer: Disclaimer
+      disclaimerContent: This product uses the TMDb API but is not endorsed or certified by TMDb.
+      code: Code
+      gitlab: GitLab
+      darkTheme: Dark Theme
+      backToTop: Back to top
+

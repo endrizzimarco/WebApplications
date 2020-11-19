@@ -1,7 +1,8 @@
--if !user_signed_in?
+-unless user_signed_in?
   .jumbotron.jumbodark
     %h2
-      =link_to "Sign up", new_user_registration_path 
-      now to keep track of the movies you've watched...
-    And remember the best ones!
+      = link_to t('.signUp'), new_user_registration_path 
+      = t('.header')
+    = t('.tagline')
+
 = render partial: 'shared/movieslist'

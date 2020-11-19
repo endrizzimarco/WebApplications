@@ -2,47 +2,47 @@
   .container-fluid
     .row
       .col-sm-3
-        %h4.text-white About
-        %p Marco Endrizzi's project for COM2025 University of Surrey
+        %h4.text-white= t('.about')
+        %p= t('.aboutContent')
       .col-sm-2
-        %h4.text-white Resources used 
+        %h4.text-white= t('.resources')
         %p 
-          Movie data from 
-          =link_to("themoviedb", "https://www.themoviedb.org/")
+          = t('.resourcesContent')
+          =link_to t('.moviedb'), 'https://www.themoviedb.org/'
       .col-sm-4
-        %h4.text-white Disclaimer
-        %p "This product uses the TMDb API but is not endorsed or certified by TMDb."
+        %h4.text-white= t('.disclaimer')
+        %p= t('.disclaimerContent')
       .col-sm-1
-        %h4.text-white Code
-        =link_to("GitLab", "https://gitlab.eps.surrey.ac.uk/me00531/me00531_com2025_project")
+        %h4.text-white= t('.code')
+        =link_to t('.gitlab'), 'https://gitlab.eps.surrey.ac.uk/me00531/me00531_com2025_project'
       .col-sm-2
         %br
         %p.pull-right
-          %a#dark-toggle.text-white.text-muted Dark Theme
-          %a.text-white{href: "#"} Back to top
+          %a#dark-toggle.text-white.text-muted= t('.darkTheme')
+          %a.text-white{href: '#'}= t('.backToTop')
 
 :javascript
   // Remember theme every time page loads 
   // Vanilla js should be faster for this
-  if (localStorage.getItem("theme") === "false") {
-    document.getElementsByTagName("body")[0].classList.toggle('dark-theme');
-    document.getElementById("dark-toggle").innerHTML = "Light Theme"
+  if (localStorage.getItem('lightTheme') === 'false') {
+    document.getElementsByTagName('body')[0].classList.toggle('dark-theme');
+    document.getElementById('dark-toggle').innerHTML = 'Light Theme'
   }
 
   // Handles light/dark mode toggle
   $(document).ready(function(){
-    $("#dark-toggle").click(function(){
-      if ($(this).html() == "Light Theme") {
-        text = "Dark Theme"
+    $('#dark-toggle').click(function(){
+      if ($(this).html() == 'Light Theme') {
+        text = 'Dark Theme'
         light = true
       } 
       else {
-        text = "Light Theme"
+        text = 'Light Theme'
         light = false
       }
       // Set theme in local storage
-      localStorage.setItem("theme", light)
-      $("body").toggleClass('dark-theme');
+      localStorage.setItem('lightTheme', light)
+      $('body').toggleClass('dark-theme');
       $(this).html(text);
     })
   });

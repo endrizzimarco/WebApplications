@@ -1,5 +1,6 @@
-- unless @movies.present?
+-unless @movies.present?
   .jumbotron.jumbodark 
-    %h2 No favourite movies added yet!
-    Favourite a movie by clicking the star after you add it!
+    %h2= t('.header')
+    = t('.tagline')
+    
 = render partial: 'shared/movieslist'

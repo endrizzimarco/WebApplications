@@ -1,7 +1,7 @@
 - unless @movies.present?
   .jumbotron.jumbodark 
-    %h2 No movies added yet!
-    Search for any movie now and add them by clicking the button and giving them a rating!
+    %h2= t('.header')
+    = t('.tagline')
 
 = render partial: 'shared/movieslist'
 

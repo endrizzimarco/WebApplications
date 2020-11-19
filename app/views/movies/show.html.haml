@@ -2,47 +2,46 @@
   .container
     .row
       .col-sm-4
-        %img.img-fluid{src: @movie.img_path, alt: "Poster"}
+        %img.img-fluid{src: @movie.img_path, alt: 'Poster'}
       .col-sm-8
         %h1#title.textborder
           = @movie.title
           -# Registered user only features
           -if not current_user.present?
-          -elsif not current_user.movies.exists?(id: @movie.id)
-            %button#button.btn.btn-default.btn-lg
-              Add to seen list
-          -elsif not current_user.favourite_movies.exists?(api_id: @movie.api_id) 
-            %span= link_to '', favourite_movies_path(id: @movie.api_id), method: :post, class: 'glyphicon glyphicon-star-empty star'
+          -elsif not current_user.movies.exists?(api_id: @movie.api_id)
+            %button.btn.btn-default.btn-lg= t('.addMovie')
+          -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
+            %span.submit= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
           -else 
-            %span= link_to '', favourite_movie_path(id: @movie.api_id), method: :delete, class: 'glyphicon glyphicon-star star'
+            %span.submit= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star star'
         %h4.textborder= @movie.tagline
         %br
         #addmovie{hidden: ''}
           = form_with url: movies_path do |f|
             #rating
               =hidden_field_tag 'id', @movie.id
-              %input#submit.btn.btn-default{type: 'submit', value: 'Submit rating'}
+              %input.submit.btn.btn-default{type: 'submit', value: t('.submit')}
         %br
         %p.textborder.synopsis= @movie.synopsis
         %br
         %p 
-          Genre:
-          %span.badge.alert-info= "#{@movie.genres}"
+          = t('.genre')
+          %span.badge.alert-info= @movie.genres
         %p
-          Release Date:
-          %span.badge.alert-warning= "#{@movie.release_date}"
+          = t('.releaseDate')
+          %span.badge.alert-warning= @movie.release_date
         %p
-          Runtime:
-          %span.badge.alert-danger= "#{@movie.runtime} minutes"
+          = t('.runtime')
+          %span.badge.alert-danger= @movie.runtime.to_s + t('.minutes')
         %p
-          Average rating: 
-          %span.badge= "#{@movie.vote_average} / 10"
-        -if Movie.exists?(id: @movie.id)
+          = t('.averageRating')
+          %span.badge= @movie.vote_average.to_s + ' / 10'
+        -if current_user.movies.exists?(id: @movie.id)
           %p
-            Your rating:
-            %span.badge.alert-success= "#{@movie.user_rating} / 10"
+            = t('.yourRating')
+            %span.badge.alert-success= @movie.user_rating.to_s + ' / 10'
         %br
-        %p Cast:
+        %p= t('.cast')
         .row
           -casts = @movie.casts.split(',')
           -i = 0
@@ -54,10 +53,9 @@
               -else 
                 %li.morecast{hidden: ''}= cast
         -if i > 10
-          %a#show Show more
+          %a#show= t('.showMore')
 
 :javascript
-
   // Star rating plugin by Washington Botelho
   $('#rating').raty({
     path: '/assets/',
@@ -69,27 +67,27 @@
 
   // Makes raty stars appear on button click
   $(document).ready(function(){
-    $("#button").click(function(){
-      $("#addmovie").toggle();
-      $("#button").toggle();
+    $('button.btn').click(function(){
+      $('#addmovie').toggle();
+      $('button.btn').toggle();
     })
   });
 
-  // Form disappears to prevent multiple sumbits while loading
+  // Buttons disappear to prevent multiple submits while loading
   $(document).ready(function(){
-    $("#submit").click(function(){
-      $("#addmovie").toggle();
+    $('.submit').click(function(){
+      $('.submit').toggle();
     })
   });
 
   // Handles show more/less cast
   $(document).ready(function(){
-    $("#show").click(function(){
-      var text = "Show less"
-      if ($(this).html() == "Show less") {
-        var text = "Show more"
+    $('#show').click(function(){
+      var text = 'Show less'
+      if ($(this).html() == 'Show less') {
+        var text = 'Show more'
       }
-      $(".morecast").toggle();
+      $('.morecast').toggle();
       $(this).html(text);
     })
   });

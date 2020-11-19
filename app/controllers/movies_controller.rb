@@ -18,7 +18,7 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = current_user.movies.order("id")
+    @movies = current_user.movies.order("api_id")
   end
 
   # GET /movies/:id  where :id represents the id of the movie in the API

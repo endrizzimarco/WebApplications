@@ -2,7 +2,7 @@ class FavouriteMoviesController < ApplicationController
   before_action :set_movie, only: [:create, :destroy]
     
   def index
-    @movies = current_user.favourite_movies
+    @movies = current_user.favourite_movies.order("api_id")
   end
   
   def create
@@ -20,6 +20,6 @@ class FavouriteMoviesController < ApplicationController
   
   private
     def set_movie
-      @movie = current_user.movies.where(api_id: params[:id]).first
+      @movie = current_user.movies.find(params[:id])
     end
 end
