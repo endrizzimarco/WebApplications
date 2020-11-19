@@ -36,7 +36,7 @@
         %p
           = t('.averageRating')
           %span.badge= @movie.vote_average.to_s + ' / 10'
-        -if current_user.movies.exists?(id: @movie.id)
+        -if current_user && current_user.movies.exists?(id: @movie.id)
           %p
             = t('.yourRating')
             %span.badge.alert-success= @movie.user_rating.to_s + ' / 10'
