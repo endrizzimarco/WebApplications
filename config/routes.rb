@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   root 'movies#home'
   get 'search' => 'movies#search'
   get 'contact' => 'contact#contact'
+  post 'request_contact' => 'contact#request_contact'
 end
