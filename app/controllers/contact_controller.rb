@@ -7,4 +7,5 @@ class ContactController < ApplicationController
     email = params[:email]
     telephone = params[:telephone]
     message = params[:message]
+  end
 end
