@@ -1,21 +1,31 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  rating: 9.99
-  genres: MyString
-  casts: MyString
-  synopsis: MyText
-  runtime: 1
-  release_date: MyString
-  img_url: MyString
+movie_one:
+  id: 1
+  title: Fight Club
+  vote_average: 9.99
+  genres: Good movies
+  casts: Brad Pitt and other people
+  synopsis: Soap
+  runtime: 139
+  release_date: '1990'
+  img_path: bigurl
+  tagline: Violence bad
+  user_rating: 9.999999
+  api_id: 550 
+  user_id: 1
 
-two:
+movie_two:
+  id: 2
   title: MyString
-  rating: 9.99
+  vote_average: 9.99
   genres: MyString
   casts: MyString
   synopsis: MyText
   runtime: 1
   release_date: MyString
-  img_url: MyString
+  img_path: MyString
+  tagline: MyString
+  user_rating: 9.99
+  api_id: 347807
+  user_id: 1

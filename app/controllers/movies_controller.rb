@@ -18,14 +18,18 @@ class MoviesController < ApplicationController
 
   # GET /movies
   def index
-    @movies = current_user.movies.order("api_id")
+    @movies = current_user.movies.order(params[:sort])
   end
 
   # GET /movies/:id  where :id represents the id of the movie in the API
   def show
       # Shows API data if not saved, otherwise show movies table data
-      if current_user and current_user.movies.exists?(api_id: params[:id]) 
-        set_movie
+      
+      if current_user 
+        movie = current_user.movies.where(api_id: params[:id])
+        if movie.exists?
+          @movie = movie.first
+        end
       end
   end
 
@@ -42,9 +46,9 @@ class MoviesController < ApplicationController
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
-      redirect_back fallback_location:"/", notice: 'Movied added to watched list'
+      redirect_back fallback_location:'', notice: 'Movied added to watched list'
     else
-      redirect_back fallback_location:"/", alert: 'Something went wrong :('
+      redirect_back fallback_location:'', alert: 'Something went wrong :('
     end
   end
 
@@ -56,9 +60,9 @@ class MoviesController < ApplicationController
 
 
   private
-    # Sets the movie to show or delete
+    # Sets the movie to delete
     def set_movie
-      @movie = current_user.movies.where(api_id: params[:id]).first
+      @movie = Movie.find(params[:id])
     end
 
     # themoviedb API connection and commands

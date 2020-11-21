@@ -1,0 +1,11 @@
+#dropdownMenu.dropdown
+  %button.btn.btn-default.dropdown-toggle{"aria-expanded" => "true", "aria-haspopup" => "true", "data-toggle" => "dropdown", type: "button"}
+    Sort By
+    %span.caret
+  %ul.dropdown-menu{"aria-labelledby" => "dropdownMenu1"}
+    %li= link_to 'Order by name', url_for(sort: 'title')
+    %li= link_to 'Order by first added', url_for(sort: 'created_at')
+    %li= link_to 'Order by last added', url_for(sort: 'created_at DESC')
+    %li= link_to 'Order by average vote', url_for(sort: 'vote_average DESC')
+    %li= link_to 'Order by your vote', url_for(sort: 'user_rating DESC')
+    %li= link_to 'Order by id', url_for(sort: 'api_id')

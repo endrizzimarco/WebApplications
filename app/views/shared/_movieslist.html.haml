@@ -6,18 +6,21 @@
           %a{href: "/movies/#{movie.api_id}"} 
             %img{src: movie.img_path, alt: 'Poster', title: movie.title}
           %h4
+            = t('.apiRating')
+            %span.badge= "#{movie.vote_average} / 10"
+            %br
             = t('.userRating')
             %span.badge.alert-success= "#{movie.user_rating} / 10"
-          %h3
+          %p
             -# X glyphicon to remove saved movies
-            %td= link_to '', movie_path(id: movie.api_id), method: :delete, class: 'glyphicon glyphicon-remove remove', 
+            = link_to '', movie_path(movie), method: :delete, class: 'glyphicon glyphicon-remove remove big', 
                               data: {confirm: t('.removeMovie')}
             -# On/off star for adding favourite movies
             -if current_user.favourite_movies.exists?(id: movie.id) 
-              %td= link_to '', favourite_movie_path(id: movie.id), method: :delete, class: 'glyphicon glyphicon-star star',
+              = link_to '', favourite_movie_path(id: movie.id), method: :delete, class: 'glyphicon glyphicon-star star big',
                               data: {confirm: t('.removeFavourite')}
             -else 
-              %td= link_to '', favourite_movies_path(id: movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
+              = link_to '', favourite_movies_path(id: movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star big'
         -else # View for non-saved movies (homepage, search)
           %a{href: "/movies/#{movie.id}"}
             -if movie.poster_path # Load API poster 

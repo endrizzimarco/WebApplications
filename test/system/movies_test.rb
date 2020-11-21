@@ -16,12 +16,16 @@ class MoviesTest < ApplicationSystemTestCase
 
     fill_in "Casts", with: @movie.casts
     fill_in "Genres", with: @movie.genres
-    fill_in "Img url", with: @movie.img_url
-    fill_in "Rating", with: @movie.rating
+    fill_in "Img path", with: @movie.img_path
+    fill_in "Rating", with: @movie.vote.average
     fill_in "Release date", with: @movie.release_date
     fill_in "Runtime", with: @movie.runtime
     fill_in "Synopsis", with: @movie.synopsis
     fill_in "Title", with: @movie.title
+    fill_in "tagline", with: @movie.tagline
+    fill_in "user_rating", with: @movie.user_rating
+    fill_in "api_id", with: @movie.api_id
+    fill_in "user_id", with: @movie.user_id
     click_on "Create Movie"
 
     assert_text "Movie was successfully created"
@@ -34,12 +38,16 @@ class MoviesTest < ApplicationSystemTestCase
 
     fill_in "Casts", with: @movie.casts
     fill_in "Genres", with: @movie.genres
-    fill_in "Img url", with: @movie.img_url
-    fill_in "Rating", with: @movie.rating
+    fill_in "Img path", with: @movie.img_path
+    fill_in "Rating", with: @movie.vote_average
     fill_in "Release date", with: @movie.release_date
     fill_in "Runtime", with: @movie.runtime
     fill_in "Synopsis", with: @movie.synopsis
     fill_in "Title", with: @movie.title
+    fill_in "tagline", with: @movie.tagline
+    fill_in "user_rating", with: @movie.user_rating
+    fill_in "api_id", with: @movie.api_id
+    fill_in "user_id", with: @movie.user_id
     click_on "Update Movie"
 
     assert_text "Movie was successfully updated"
