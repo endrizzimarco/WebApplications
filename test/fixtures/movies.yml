@@ -2,17 +2,17 @@
 
 movie_one:
   id: 1
-  title: Fight Club
-  vote_average: 9.99
-  genres: Good movies
-  casts: Brad Pitt and other people
-  synopsis: Soap
-  runtime: 139
-  release_date: '1990'
-  img_path: bigurl
-  tagline: Violence bad
-  user_rating: 9.999999
-  api_id: 550 
+  title: Requiem for a Dream
+  vote_average: 8.0
+  genres: Crime / Drama / Thriller
+  casts: Ellen Burstyn
+  synopsis: The hopes and dreams of four ambitious people are shattered when their drug addictions begin spiraling out of control. A look into addiction and how it overcomes the mind and body.
+  runtime: 102
+  release_date: '2000-10-06'
+  img_path: https://image.tmdb.org/t/p/w400/nOd6vjEmzCT0k4VYqsA2hwyi87C.jpg
+  tagline: ''
+  user_rating: 10.0
+  api_id: 641
   user_id: 1
 
 movie_two:
@@ -26,6 +26,6 @@ movie_two:
   release_date: MyString
   img_path: MyString
   tagline: MyString
-  user_rating: 9.99
+  user_rating: null
   api_id: 347807
-  user_id: 1
+  user_id: 2 # saved for user 2

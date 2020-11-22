@@ -81,3 +81,6 @@ gem 'themoviedb'
 
 # Using haml instead of erb
 gem 'haml-rails'
+
+# Bring back assigns and assert_template for testing
+gem 'rails-controller-testing'
