@@ -10,11 +10,11 @@
     -# Collect the nav links, forms, and other content for toggling
     #bs-example-navbar-collapse-1.collapse.navbar-collapse
       %ul.nav.navbar-nav
+        %li
+          %a{href: movies_path}
+            .glyphicon.glyphicon-film
+            = t('.seenMovies')
         -if user_signed_in?
-          %li
-            %a{href: movies_path}
-              .glyphicon.glyphicon-film
-              = t('.seenMovies')
           %li
             %a{href: favourite_movies_path}
               .glyphicon.glyphicon-heart-empty

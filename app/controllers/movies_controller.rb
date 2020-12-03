@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
   before_action :set_movie, only: [:destroy]
   before_action :set_movie_api, only: [:show, :create]
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :image_path
 
   # GET root
@@ -46,16 +46,16 @@ class MoviesController < ApplicationController
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
-      redirect_back fallback_location:'', notice: 'Movied added to watched list'
+      redirect_back fallback_location:'', notice: I18n.t('movies.create.notice')
     else
-      redirect_back fallback_location:'', alert: 'Something went wrong :('
+      redirect_back fallback_location:'', alert: I18n.t('movies.create.alert')
     end
   end
 
   # DELETE /movies/:id  where :id represents the primary key of the saved movie
   def destroy
     @movie.destroy
-      redirect_to movies_url, notice: 'Movie was successfully removed' 
+      redirect_to movies_url, notice: I18n.t('movies.destroy.notice')
   end
 
 

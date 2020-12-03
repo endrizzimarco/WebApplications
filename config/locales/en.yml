@@ -59,11 +59,25 @@ en:
       yourRating: 'Your rating:'
       cast: 'Cast:'
 
+    create:
+      notice: Movied added to watched list
+      alert: Something went wrong :(
+
+    delete:
+      notice: Movie was successfully removed
+
   favourite_movies:
     index:
       header: No favourite movies added yet!
       tagline: Favourite a movie by clicking the star after you add it!
-  
+
+    create:
+      notice: Movie has been favourited
+      alert: Something went wrong :(
+    
+    destroy:
+      notice: Movie is no longer in favourites
+
   contact:
     contact:
       name: Name
@@ -71,7 +85,10 @@ en:
       telephone: Telephone
       message: Message
       submit: Submit
-      
+    
+    request_contact:
+      notice: Email sent succesfully!
+      alert: Please insert an email
 
   shared:
     header:

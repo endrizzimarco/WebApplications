@@ -9,9 +9,9 @@ class ContactController < ApplicationController
     message = params[:message]
 
     unless email.blank?
-      redirect_back fallback_location:'/', notice: 'Email sent succesfully!'
+      redirect_back fallback_location:'/', notice: I18n.t('contact.request_contact.notice')
     else 
-      redirect_back fallback_location:'/', alert: 'Please insert an email'
+      redirect_back fallback_location:'/', alert: I18n.t('contact.request_contact.alert') 
     end
 
   end

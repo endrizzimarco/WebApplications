@@ -37,9 +37,11 @@ gem 'bootsnap', '>= 1.1.0', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Use sqlite3 for development and testing enviroment
+  gem 'sqlite3'
 end
 
-group :development, :production do
+group :production do
   # Use PostgreSQL as the database for development and production
   gem 'pg'
 end
@@ -55,7 +57,6 @@ end
 
 group :test do
   # Use sqlite3 as the database for testing
-  gem 'sqlite3', group: :test
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15', '< 4.0'
   gem 'selenium-webdriver'
@@ -84,3 +85,6 @@ gem 'haml-rails'
 
 # Bring back assigns and assert_template for testing
 gem 'rails-controller-testing'
+
+# .env files support
+gem 'dotenv-rails'

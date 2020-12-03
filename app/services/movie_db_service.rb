@@ -3,7 +3,7 @@ class MovieDbService
 
   def initialize
     @configuration = Tmdb::Configuration.new
-    @key = Tmdb::Api.key 'd29686c246b8dfb0d2260c40c143ff29'
+    @key = Tmdb::Api.key(ENV["MOVIE_DB_KEY"])
     @tmdb = Tmdb::Movie
   end
 
