@@ -1,9 +1,18 @@
 // _header.html.haml
+@font-face {font-family: "AGRevueCyr";
+  src: url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.eot"); /* IE9*/
+  src: url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.woff2") format("woff2"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.woff") format("woff"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.svg#AGRevueCyr") format("svg"); /* iOS 4.1- */
+}
+
 header {
   background-color: #101010 !important;
 
   #title {
-    font-family: "AGRevueCyr";
+    font-family: 'AGRevueCyr';
     letter-spacing: 2px; 
   }
 
