@@ -4,8 +4,8 @@ class MoviesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :image_path
 
-  # GET root
-  def home 
+  # GET /popular
+  def popular
     @movies = movie_service.popular
   end
 

@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :movies, only: [:create, :destroy, :index, :show]
   resources :favourite_movies, only: [:create, :destroy, :index]
 
-  root 'movies#home'
+  root 'home#home'
+  get 'popular' => 'movies#popular'
   get 'search' => 'movies#search'
-  get 'contact' => 'contact#contact'
-  post 'request_contact' => 'contact#request_contact'
+  get 'contact' => 'home#contact'
+  post 'request_contact' => 'home#request_contact'
 end

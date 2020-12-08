@@ -7,7 +7,7 @@
   padding-top: 24px
 }
 
-#title {
+#movietitle {
   font-weight: bold;
 }
 
@@ -16,15 +16,15 @@
 }
 
 .star {
-  color: rgb(255, 200, 0);
+  color: #ffd63f;
   
   &:hover {
-    color: rgb(255, 200, 0);
+    color: #ffd63f;
     text-decoration: none;
   }
 
   &:visited {
-    color: rgb(255, 200, 0);
+    color: #ffd63f;
   }
 }
 

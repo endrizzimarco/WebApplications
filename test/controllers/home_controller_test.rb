@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ContactControllerTest < ActionDispatch::IntegrationTest
+class HomeControllerTest < ActionDispatch::IntegrationTest
 
   test "should get contact" do
     get contact_url

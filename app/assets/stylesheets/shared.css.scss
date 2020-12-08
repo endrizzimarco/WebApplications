@@ -1,9 +1,23 @@
 // _header.html.haml
-#current {
-  background-color:#3f3f3f;
+header {
+  background-color: #101010 !important;
 
-  &:hover {
-  background-color:#3f3f3f;
+  #title {
+    font-family: "AGRevueCyr";
+    letter-spacing: 2px; 
+  }
+
+  #current {
+    background-color:#3f3f3f;
+
+    &:hover {
+    background-color:#3f3f3f;
+    }
+  }
+
+  .navbar-brand { 
+    font-size: 25px; 
+    color: #cccccc !important;
   }
 }
 
@@ -20,23 +34,23 @@ a {
 }
 
 .remove {
-  color: rgb(170, 1, 1);
+  color: #ff5f5f;
 
   &:hover {
-    color: rgb(170, 1, 1);
+    color: #ff5f5f;
     text-decoration: none;
   }
 
   &:visited {
-    color: rgb(170, 1, 1);
+    color: #ff5f5f;
   }
 }
 
 //_footer.html.haml
 footer {
   position: relative;
-  margin-top: -80px; // negative value of footer height 
-  height: 80px;
+  margin-top: -85px; // negative value of footer height 
+  height: 85px;
   clear:both;
   padding-top: 0px;
   background-color: #101010;
@@ -64,5 +78,22 @@ footer {
 } 
 
 .big {
-  font-size:200%;
+  font-size:150%;
+  float:right;
+}
+
+.pill {
+  background-color: #ddd;
+  color: black;
+  padding: 10px 15px;
+  text-decoration: none;
+  cursor: pointer;  
+  border-radius: 20px;
+  margin-top: 8px;
+  margin-left: 8px;
+  float: right;
+
+  &:hover {
+    background-color: #f1f1f1;
+  }
 }

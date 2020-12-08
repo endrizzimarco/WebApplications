@@ -4,7 +4,7 @@
       .col-sm-4
         %img.img-fluid{src: @movie.img_path, alt: 'Poster'}
       .col-sm-8
-        %h1#title.textborder
+        %h1#movietitle.textborder
           = @movie.title
           -# Registered user only features
           -if not current_user.present?

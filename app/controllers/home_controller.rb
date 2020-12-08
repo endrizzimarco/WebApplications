@@ -1,4 +1,9 @@
-class ContactController < ApplicationController
+class HomeController < ApplicationController
+
+  # GET root
+  def home
+  end
+
   def contact
   end
 
