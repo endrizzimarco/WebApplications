@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :movies, only: [:create, :destroy, :index, :show]
+  resources :movies, only: [:create, :destroy, :index, :show, :update]
   resources :favourite_movies, only: [:create, :destroy, :index]
 
   root 'home#home'

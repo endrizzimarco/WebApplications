@@ -1,7 +1,8 @@
 -unless @movies.present?
-  .jumbotron.jumbodark 
-    %h2= t('.header')
-    = t('.tagline')
+  .col-sm-6
+    .jumbotron.jumbodark 
+      %h2= t('.header')
+      = t('.tagline')
 -else
   = render partial: 'shared/sortby'
   = render partial: 'shared/movieslist'

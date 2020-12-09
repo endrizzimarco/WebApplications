@@ -78,7 +78,7 @@ en:
     destroy:
       notice: Movie is no longer in favourites
 
-  contact:
+  home:
     contact:
       name: Name
       email: Email

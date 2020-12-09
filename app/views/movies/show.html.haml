@@ -18,10 +18,9 @@
         %br
         #addmovie{hidden: ''}
           = form_with url: movies_path do |f|
-            #rating
-              =hidden_field_tag 'id', @movie.id
-              %input.submit.btn.btn-default{type: 'submit', value: t('.submit')}
-        %br
+            #ratyjs
+            =hidden_field_tag 'id', @movie.id
+            %input.submit.btn.btn-default{type: 'submit', value: t('.submit')}
         %p.textborder.synopsis= @movie.synopsis
         %br
         %p 
@@ -40,12 +39,17 @@
           %p
             = t('.yourRating')
             %span.badge.alert-success= @movie.user_rating.to_s + ' / 10'
+            %span#edit.glyphicon.glyphicon-edit
+          #changeRating{hidden: ''}
+            =form_tag movie_path(@movie), method: 'patch', oninput: 'x.value=parseFloat(score.value).toFixed(1)' do
+              %input#slidebar{max: '10', min: '0', name: 'score', step: '0.5', type: "range"}
+              %output{name: 'x'} 5.0
+              = submit_tag 'Submit new rating', class: 'btn btn-default'
         %br
         %p= t('.cast')
         .row
-          -casts = @movie.casts.split(',')
           -i = 0
-          -casts.each do |cast|
+          -@movie.casts.split(',').each do |cast|
             -i += 1
             .col-sm-4
               -if i < 10
@@ -57,7 +61,7 @@
 
 :javascript
   // Star rating plugin by Washington Botelho
-  $('#rating').raty({
+  $('#ratyjs').raty({
     path: '/assets/',
     half: true,
     number: 10,
@@ -70,6 +74,13 @@
     $('button.btn').click(function(){
       $('#addmovie').toggle();
       $('button.btn').toggle();
+    })
+  });
+
+    // Makes raty stars appear on button click
+  $(document).ready(function(){
+    $('#edit').click(function(){
+      $('#changeRating').toggle();
     })
   });
 

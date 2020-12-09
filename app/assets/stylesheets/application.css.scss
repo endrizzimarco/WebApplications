@@ -16,6 +16,14 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+@font-face {font-family: "AGRevueCyr";
+  src: url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.eot"); /* IE9*/
+  src: url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.woff") format("woff"), /* chrome firefox */
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+  url("https://db.onlinewebfonts.com/t/c3d58453494fdb4819ddc387b6057cde.svg#AGRevueCyr") format("svg"); /* iOS 4.1- */
+}
+
 html, body {
   height: 100%;
 }
@@ -50,11 +58,11 @@ body.dark-theme {
   }
 
   .jumbodark {
-    background-color: #dbf3ff08;
+    background-color: #151616db;
   }
   
 }
 
-.jumbotron {
-  background-color: #cfeefd9e; 
+.jumbotron-blue {
+  background-color: #cfeefd9e
 }

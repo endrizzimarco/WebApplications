@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: [:destroy]
+  before_action :set_movie, only: [:destroy, :update]
   before_action :set_movie_api, only: [:show, :create]
   before_action :authenticate_user!, only: [:index, :create]
   before_action :image_path
@@ -40,6 +40,10 @@ class MoviesController < ApplicationController
       @movie.img_path = "https://via.placeholder.com/400x560?text=#{@movie.title}"
     end
 
+    if params[:user_rating].empty?
+      params[:user_rating] = 0
+    end
+
     # Save the movie api data and the rating into the movies table
     @newmovie = current_user.movies.build(api_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
@@ -50,6 +54,12 @@ class MoviesController < ApplicationController
     else
       redirect_back fallback_location:'', alert: I18n.t('movies.create.alert')
     end
+  end
+
+  def update
+    @movie.user_rating = params[:score]
+    @movie.save
+    redirect_back fallback_location:''
   end
 
   # DELETE /movies/:id  where :id represents the primary key of the saved movie

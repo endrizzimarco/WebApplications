@@ -9,6 +9,10 @@
 
 #movietitle {
   font-weight: bold;
+
+  .glyphicon {
+    top: 5px;
+  }
 }
 
 #show:hover {
@@ -34,4 +38,23 @@
 
 #dropdownMenu {
   padding-bottom: 20px;
+}
+
+#edit {
+  cursor: pointer;
+  font-size: 130%;
+  top: 4px;
+  left: 4px;
+  color: rgba(26, 25, 25, 0.8);
+}
+
+#changeRating {
+  #slidebar {
+    width:180px;
+    display: inline;
+  }
+
+  output { 
+    display: inline;
+  }
 }
