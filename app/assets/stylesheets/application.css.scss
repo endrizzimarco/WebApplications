@@ -48,8 +48,8 @@ body.dark-theme {
   background-image: url("background.png");
   color:white;
 
-  #thumbnail {
-    background-color: #000000;
+  .thumbnail {
+    background-color:#3f3f3f5e;
     border-color: #000000;
   }
   
@@ -61,8 +61,4 @@ body.dark-theme {
     background-color: #151616db;
   }
   
-}
-
-.jumbotron-blue {
-  background-color: #cfeefd9e
 }

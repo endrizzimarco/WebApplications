@@ -1,0 +1,21 @@
+.text-center {
+    margin-top: 20px;
+    form {
+        width: 100%;
+        max-width: 330px;
+        padding: 15px;
+        margin: 0 auto;
+
+        .form-control {
+            padding: 20px;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+
+        label {
+            font-weight: normal;
+            margin-top: 8px;
+        }
+    }
+}

@@ -1,19 +1,14 @@
-.col-md-4
-.col-md-4
-  .jumbotron.jumbotron-blue.jumbodark
-    %h2 Log in
-    %br
+.text-center
+  = image_tag("forms_logo.png", width: 90, height: 90)
+  %h2 Please log in
+  .form-signin
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-      .field.form-group
-        = f.label :email
-        = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"
-      .field.form-group
-        = f.label :password
-        = f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password"
+      = f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "Email"
+      = f.password_field :password, autocomplete: "current-password", class: "form-control", placeholder: "Password"
       - if devise_mapping.rememberable?
         .field.form-group
           = f.check_box :remember_me
           = f.label :remember_me
       .actions
-        = f.submit "Log in", class: "btn btn-primary"
+        = f.submit "Log in", class: "btn btn-primary btn-lg btn-block"
     = render "devise/shared/links"

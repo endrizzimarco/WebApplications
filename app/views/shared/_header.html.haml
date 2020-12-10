@@ -23,9 +23,9 @@
                   = t('.logIn')
             -else
               %a{href: edit_user_registration_path}
-              .pill
-                .glyphicon.glyphicon-user
-                = current_user.email
+                .pill
+                  .glyphicon.glyphicon-user
+                  = current_user.email
               %a{href: destroy_user_session_path}
                 .pill
                   .glyphicon.glyphicon-log-out

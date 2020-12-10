@@ -1,18 +1,17 @@
-.container
-  .jumbotron.jumbotron-blue.jumbodark
-    %h2 Contact Us
-    %br
+.text-center
+  %h2.textborder Contact Us
+  .form-signin
     = form_tag request_contact_path, method: 'post' do
       .form-group
-        = label_tag :name, t('.name')
+        .pull-left= label_tag :name, t('.name')
         = text_field_tag :name, '', class: 'form-control', placeholder: t('.name'), autofocus: true
       .form-group
-        = label_tag :email, t('.email')
+        .pull-left= label_tag :email, t('.email')
         = email_field_tag :email, '', class: 'form-control', placeholder: t('.email'), autofocus: true
       .form-group
-        = label_tag :telephone, t('.telephone')
+        .pull-left= label_tag :telephone, t('.telephone')
         = text_field_tag :telephone, '', class: 'form-control', placeholder: t('.telephone'), autofocus: true
       .form-group
-        = label_tag :message, t('.message')
+        .pull-left= label_tag :message, t('.message')
         %textarea#message.form-control{name: 'message', rows: 3, placeholder: t('.message'), autofocus: true}
       = submit_tag t('.submit'), class: 'btn btn-primary'
