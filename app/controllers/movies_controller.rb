@@ -24,11 +24,10 @@ class MoviesController < ApplicationController
   # GET /movies/:id  where :id represents the id of the movie in the API
   def show
       # Shows API data if not saved, otherwise show movies table data
-      if current_user and Movie.find_by(api_id: params[:id], user_id: current_user.id)
-        @movie = Movie.find_by(api_id: params[:id], user_id: current_user.id)
-        @reviews = Review.where(movie_api_id: @movie.api_id).order("created_at DESC")[0..3]
+      if current_user and current_user.movies.saved(params[:id]).exists?
+        @movie = current_user.movies.saved(params[:id]).first
+        Review.recent_reviews(@movie.api_id)
       end
-      
   end
 
   # POST /movies
@@ -48,22 +47,24 @@ class MoviesController < ApplicationController
             runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
 
     if @newmovie.save
-      redirect_back fallback_location:'', notice: I18n.t('movies.create.notice')
+      redirect_back fallback_location: '', notice: I18n.t('movies.create.notice')
     else
-      redirect_back fallback_location:'', alert: I18n.t('movies.create.alert')
+      redirect_back fallback_location: '', alert: I18n.t('movies.create.alert')
     end
   end
 
   def update
     @movie.user_rating = params[:score]
-    @movie.save
-    redirect_back fallback_location:''
+    if @movie.save
+      redirect_back fallback_location: ''
+    end
   end
 
   # DELETE /movies/:id  where :id represents the primary key of the saved movie
   def destroy
-    @movie.destroy
+    if @movie.destroy
       redirect_to movies_url, notice: I18n.t('movies.destroy.notice')
+    end
   end
 
 
@@ -93,6 +94,6 @@ class MoviesController < ApplicationController
     def set_movie_api
       @movie = MoviePresenter.new(movie_detail).data
       @movie[:img_path] = "#{image_path}w400#{@movie.poster_path}"
-      @reviews = Review.where(movie_api_id: @movie.id).order("created_at DESC")[0..3]
+      @reviews = Review.recent_reviews(@movie.id)
     end
 end
