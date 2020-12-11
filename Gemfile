@@ -88,3 +88,6 @@ gem 'rails-controller-testing'
 
 # .env files support
 gem 'dotenv-rails'
+
+# Validation of forms with jquery
+gem 'jquery-validation-rails'

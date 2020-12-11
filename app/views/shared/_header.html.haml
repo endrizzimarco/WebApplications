@@ -61,14 +61,3 @@
               = submit_tag(t('.submit'), class: 'btn btn-default')
     -# navbar-collapse
   -# container-fluid
-
-
--# Make active view lighter on navbar
-:javascript
-  var loc = window.location.pathname;
-
-  $('.navbar-nav li').find('a').each(function() {
-    if ($(this).attr('href') == loc) {
-      $(this).prop('id', 'current');
-    }
-  });

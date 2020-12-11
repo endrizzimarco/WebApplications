@@ -16,3 +16,8 @@
 //= require turbolinks
 //= require_tree .
 //= require bootstrap-sprockets
+//= require form-validation
+//= require active-page
+//= require dark-mode
+//= require movies-show
+
