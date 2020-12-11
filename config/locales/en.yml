@@ -36,7 +36,22 @@ en:
   layouts:
     application:
       title: MyMovieList
-  
+
+  home:
+    home:
+      search: Search Movies ...
+      signUp: Sign up
+    contact:
+      name: Name
+      email: Email
+      telephone: Telephone
+      message: Message
+      submit: Submit
+    
+    request_contact:
+      notice: Email sent succesfully!
+      alert: Please insert an email
+
   movies:
     home:
       signUp: Sign up 
@@ -48,16 +63,24 @@ en:
       tagline: Search for any movie now and add them by clicking the button and giving them a rating!
 
     show: 
+      poster: Poster
       addMovie: Add to seen list
+      seeReviews: See Reviews 
       submit: Submit rating
       showMore: Show more
+      seeDetails: See Details
       minutes: ' minutes'
       genre: 'Genre:'
       releaseDate: 'Release Date:'
       runtime: 'Runtime:'
       averageRating: 'Average rating:'
       yourRating: 'Your rating:'
+      submitRating: 'Submit new rating'
       cast: 'Cast:'
+      noReviews: 'No reviews just yet!'
+      edit: 'Edit'
+      delete: 'Delete'
+      writeReview: 'Write Review'
 
     create:
       notice: Movied added to watched list
@@ -78,17 +101,24 @@ en:
     destroy:
       notice: Movie is no longer in favourites
 
-  home:
-    contact:
-      name: Name
-      email: Email
-      telephone: Telephone
-      message: Message
-      submit: Submit
-    
-    request_contact:
-      notice: Email sent succesfully!
-      alert: Please insert an email
+  reviews:
+    form:
+      placeholder: What did you think of the movie?
+      save: Save
+      error: 'prohibited this review from being saved:'
+      back: Back 
+    new:
+      title: New Review
+    create: 
+      notice: Review was successfully created.
+      alert: Something went wrong :(
+    edit:
+      title: Editing Review
+    update: 
+      notice: Review was successfully updated.
+      alert: Something went wrong :(
+    destroy: 
+      notice: Review was successfully destroyed.
 
   shared:
     header:
@@ -103,6 +133,15 @@ en:
       contact: Contact Us
       submit: Search
       searchMovies: Search movies
+
+    sortby:
+      sortBy: Sort By
+      orderName: Order by name
+      orderFirst: Order by first added
+      orderLast: Order by last added
+      orderAverage: Order by average vote
+      orderVote: Order by your vote
+      orderId: Order by id
 
     movieslist: 
       userRating: 'Your vote:'
@@ -122,4 +161,5 @@ en:
       gitlab: GitLab
       darkTheme: Dark Theme
       backToTop: Back to top
+
 

@@ -1,13 +1,15 @@
 = form_for([@movie, review]) do |f|
   - if @review.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@review.errors.count, "error")} prohibited this review from being saved:"
+      %h2
+        = pluralize(@review.errors.count, "error").to_s
+        = t('.error')
       %ul
         - @review.errors.full_messages.each do |message|
           %li= message
 
   .field
-    = f.label :comment
-    = f.text_area :comment
+    = f.text_area :comment, class: "form-control", placeholder: t('.placeholder')
   .actions
-    = f.submit 'Save'
+    = f.submit t('.save'), class: "btn btn-success btn-lg btn-block"
+= link_to t('.back'), movie_path(@movie.api_id)

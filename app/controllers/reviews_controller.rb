@@ -3,55 +3,41 @@ class ReviewsController < ApplicationController
   before_action :set_movie
   before_action :authenticate_user!
 
-  # GET /reviews/new
+  # GET /movies/:movie_id/reviews/new
   def new
     @review = Review.new
   end
 
-  # GET /reviews/1/edit
+  # GET /movies/:movie_id/reviews/:id/edit
   def edit
   end
 
-  # POST /reviews
-  # POST /reviews.json
+  # POST /movies/:movie_id/reviews
   def create
-    @review = Review.new(review_params)
-    @review.user_id = current_user.id
+    @review = current_user.reviews.new(review_params)
     @review.movie_id = @movie.id
     @review.movie_api_id = @movie.api_id
 
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to "/movies/#{@movie.api_id}", notice: 's'}
-        format.json { render :show, status: :created, location: @review }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review.save
+      redirect_to "/movies/#{@movie.api_id}", notice: 's'
+    else
+      redirect_to "/movies/#{@movie.api_id}", notice: 's'
     end
   end
 
-  # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
+  # PATCH/PUT /movies/:movie_id/reviews/:id
   def update
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
+    if @review.update(review_params)
+      redirect_to "/movies/#{@movie.api_id}", notice: I18n.t('reviews.update.notice')
+    else
+      redirect_to "/movies/#{@movie.api_id}", alert: I18n.t('reviews.update.alert')
     end
   end
 
-  # DELETE /reviews/1
-  # DELETE /reviews/1.json
+  # DELETE /movies/:movie_id/reviews/:id
   def destroy
-    @review.destroy
-    respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
-      format.json { head :no_content }
+    if @review.destroy
+      redirect_back fallback_location: '', notice: I18n.t('reviews.destroy.notice')
     end
   end
 

@@ -1,7 +1,4 @@
-%h1 Editing review
-
-= render 'form'
-
-= link_to 'Show', @review
-\|
-= link_to 'Back', reviews_path
+.text-center
+  %h2.textborder= t('.title')
+  .form-signin
+    = render 'form', review: @review

@@ -2,27 +2,29 @@
   .container
     .row
       .col-sm-4
-        %img.img-fluid{src: @movie.img_path, alt: 'Poster'}
-
+        %img.img-fluid{src: @movie.img_path, alt: t('.poster')}
+      -# Movie details page
       #movieDetails.col-sm-8
         %h1#movietitle.textborder
           = @movie.title
           -# Registered user only features
           -if not current_user.present?
-          -elsif not current_user.movies.exists?(api_id: @movie.api_id)
-            %button.btn.btn-default.btn-lg= t('.addMovie')
-          -elsif not current_user.favourite_movies.exists?(id: @movie.id) 
-            %span.submit= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
-          -else 
-            %span.submit= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star star'
-          %a.toggle See Reviews
+          -elsif not current_user.movies.exists?(@movie.id) # If movie not saved show 'add button'
+            %button.btn.btn-default.btn-lg= t('.addMovie') 
+          -elsif not current_user.favourite_movies.exists?(@movie.id) # If movie favourited link to unfavourite and show empty star
+            %span.submit= link_to '', favourite_movies_path(@movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
+          -else # If movie not in favourite list link to favourite and show full star
+            %span.submit= link_to '', favourite_movie_path(@movie.id), method: :delete, class: 'glyphicon glyphicon-star star'
+          %a.toggle= t('.seeReviews')
         %h4.textborder= @movie.tagline
         %br
+        -# Form used to 
         #addmovie{hidden: ''}
           = form_with url: movies_path do |f|
             #ratyjs
             =hidden_field_tag 'id', @movie.id
             %input.submit.btn.btn-default{type: 'submit', value: t('.submit')}
+          %br
         %p.textborder.synopsis= @movie.synopsis
         %br
         %p 
@@ -37,47 +39,47 @@
         %p
           = t('.averageRating')
           %span.badge= @movie.vote_average.to_s + ' / 10'
-        -if current_user && current_user.movies.exists?(id: @movie.id)
+        -if current_user && current_user.movies.exists?(@movie.id)
           %p
             = t('.yourRating')
             %span.badge.alert-success= @movie.user_rating.to_s + ' / 10'
             %span#edit.glyphicon.glyphicon-edit
           #changeRating{hidden: ''}
             =form_tag movie_path(@movie), method: 'patch', oninput: 'x.value=parseFloat(score.value).toFixed(1)' do
-              %input#slidebar{max: '10', min: '0', name: 'score', step: '0.5', type: "range"}
-              %output{name: 'x'} 5.0
-              = submit_tag 'Submit new rating', class: 'btn btn-default'
+              %input#slidebar{max: '10', min: '0', name: 'score', step: '0.5', type: "range", value: @movie.user_rating}
+              %output{name: 'x'}= @movie.user_rating
+              = submit_tag t('.submitRating'), class: 'btn btn-default'
         %br
         %p= t('.cast')
         .row
           -i = 0
-          -@movie.casts.split(',').each do |cast|
+          -@movie.casts.split(',').each do |cast| # Loop through all the cast members
             -i += 1
             .col-sm-4
-              -if i < 10
-                %li= cast
+              -if i < 10 
+                %li= cast # Print first 9 cast members
               -else 
-                %li.morecast{hidden: ''}= cast
-        -if i > 10
+                %li.morecast{hidden: ''}= cast # Overflowing cast is printed but hidden from view
+        -if i > 10 # If cast size overflowed show button to toggle view of extra cast
           %a#show= t('.showMore')
-      
+      -# Reviews page
       #reviews.col-sm-8{hidden: ''}
         %h1#movietitle.textborder 
           = @movie.title
-          %a.toggle See Details
-        
-        -if @reviews.blank?
-          %h3 No reviews just yet, would you like to add the first!
-          = link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger"
-        -else   
-          %br
-          -@reviews.each do |review|
-            = User.find(review.user_id).email
-            .ratyscore{score: Movie.find(review.movie_id).user_rating}
-            = review.comment 
+          %a.toggle= t('.seeDetails')
+        -if @reviews.blank? # If movie has no reviews show sad message
+          %h3= t('.noReviews')
+        -else # Else print last 4 reviews for the movie 
+          -@reviews.each do |review|  
+            = User.find(review.user_id).email # Email of the user that wrote the review
+            .ratyscore{score: Movie.find(review.movie_id).user_rating}= # Score is tied to the saved movie not the review
+            = review.comment # Review content
+            -if current_user and review.user_id == current_user.id # If user wrote the review show edit and delete buttons
+              = link_to t('.edit'), edit_movie_review_path(@movie, review.id)
+              = link_to t('.delete'), movie_review_path(@movie, review.id), method: :delete
             %hr
-          -if current_user and current_user.movies.exists?(api_id: @movie.api_id)
-            = link_to "Write Review", new_movie_review_path(@movie), class: "btn btn-danger"
+        -if current_user and current_user.movies.exists?(@movie.id) # Only users that added a movie to their list can write a review
+          = link_to t('.writeReview'), new_movie_review_path(@movie), class: "btn btn-danger"
 
 :javascript
   // Star rating plugin by Washington Botelho
