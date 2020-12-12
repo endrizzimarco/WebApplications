@@ -5,9 +5,9 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
 
   setup do
     get '/users/sign_in'
-    sign_in users(:user_one)
+    sign_in users(:one)
     post user_session_url
-    @movie = movies(:movie_one)
+    @movie = movies(:one)
   end
 
   test "should get home" do 

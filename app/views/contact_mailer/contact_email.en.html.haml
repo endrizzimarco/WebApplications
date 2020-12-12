@@ -1,5 +1,9 @@
+:css
+  p{color: red;}
+
 %p= "Dear #{t('app_title')},"
-%p= "Could you get in touch with me please?"
+%p= "Could you get in touch with me please? Or not  "
+= image_tag("forms_logo.png", width:90, height:90)
 %dl
   %dt Name:
   %dd= @name
@@ -12,3 +16,5 @@
 
 %p Thanks,
 %p= @name
+
+%link{rel:"stylesheet", href:"contact_mailer.css"}

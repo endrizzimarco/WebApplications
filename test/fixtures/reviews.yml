@@ -1,7 +1,66 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+valid: 
+  comment: 'comment'
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '10/12/1999'
+
 one:
-  comment: MyText
+  comment: A review
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '10/12/2020'
 
 two:
-  comment: MyText
+  comment: A review
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '10/12/2000'
+
+three:
+  comment: A review
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '17/9/2020'
+
+four:
+  comment: A review
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '10/11/2020'
+
+five:
+  comment: A review
+  user_id: 1
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '11/12/2020'
+
+six:
+  comment: A review
+  user_id: 3
+  movie_id: 1
+  movie_api_id: 641
+  created_at: '1/1/2000'
+
+seven:
+  comment: A review
+  user_id: 3
+  movie_id: 3
+  movie_api_id: 641
+  created_at: '1/1/2000'
+
+eight:
+  comment: A review
+  user_id: 3
+  movie_id: 3
+  movie_api_id: 641
+  created_at: '1/1/2000'
+
+

@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-movie_one:
+one:
   id: 1
   title: Requiem for a Dream
   vote_average: 8.0
@@ -15,7 +15,7 @@ movie_one:
   api_id: 641
   user_id: 1
 
-movie_two:
+two:
   id: 2
   title: MyString
   vote_average: 9.99
@@ -28,4 +28,19 @@ movie_two:
   tagline: MyString
   user_rating: null
   api_id: 347807
-  user_id: 2 # saved for user 2
+  user_id: 3
+
+valid:
+  id: 3
+  title: MyString
+  vote_average: 9.99
+  genres: MyString
+  casts: MyString
+  synopsis: MyText
+  runtime: 1
+  release_date: MyString
+  img_path: "https://image.tmdb.org/t/p/w400/eLT8Cu357VOwBVTitkmlDEg32Fs.jpg"
+  tagline: MyString
+  user_rating: 2
+  api_id: 641
+  user_id: 3

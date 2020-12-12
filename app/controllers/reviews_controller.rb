@@ -19,9 +19,9 @@ class ReviewsController < ApplicationController
     @review.movie_api_id = @movie.api_id
 
     if @review.save
-      redirect_to "/movies/#{@movie.api_id}", notice: 's'
+      redirect_to "/movies/#{@movie.api_id}", notice: I18n.t('reviews.create.notice')
     else
-      redirect_to "/movies/#{@movie.api_id}", notice: 's'
+      redirect_to "/movies/#{@movie.api_id}", notice: I18n.t('reviews.create.destroy')
     end
   end
 

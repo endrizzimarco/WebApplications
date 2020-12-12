@@ -11,10 +11,10 @@
           -if not current_user.present?
           -elsif not current_user.movies.exists?(@movie.id) # If movie not saved show 'add button'
             %button.btn.btn-default.btn-lg= t('.addMovie') 
-          -elsif not current_user.favourite_movies.exists?(@movie.id) # If movie favourited link to unfavourite and show empty star
-            %span.submit= link_to '', favourite_movies_path(@movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
+          -elsif not current_user.favourite_movies.exists?(id: @movie.id) # If movie favourited link to unfavourite and show empty star
+            %span.submit= link_to '', favourite_movies_path(id: @movie.id), method: :post, class: 'glyphicon glyphicon-star-empty star'
           -else # If movie not in favourite list link to favourite and show full star
-            %span.submit= link_to '', favourite_movie_path(@movie.id), method: :delete, class: 'glyphicon glyphicon-star star'
+            %span.submit= link_to '', favourite_movie_path(id: @movie.id), method: :delete, class: 'glyphicon glyphicon-star star'
           %a.toggle= t('.seeReviews')
         %h4.textborder= @movie.tagline
         %br

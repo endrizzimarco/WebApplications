@@ -15,7 +15,7 @@ class FavouriteMoviesController < ApplicationController
   end
   
   def destroy
-    Favourite.find_by(favourited_id: @movie.id, user_id: current_user.id).destroy
+    Favourite.find_by(favourited_id: @movie.id).destroy
     redirect_back(fallback_location:'', notice: I18n.t('favourite_movies.destroy.notice'))
   end
   

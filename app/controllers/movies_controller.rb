@@ -26,7 +26,7 @@ class MoviesController < ApplicationController
       # Shows API data if not saved, otherwise show movies table data
       if current_user and current_user.movies.saved(params[:id]).exists?
         @movie = current_user.movies.saved(params[:id]).first
-        Review.recent_reviews(@movie.api_id)
+        Review.recent(@movie.api_id)
       end
   end
 
@@ -94,6 +94,6 @@ class MoviesController < ApplicationController
     def set_movie_api
       @movie = MoviePresenter.new(movie_detail).data
       @movie[:img_path] = "#{image_path}w400#{@movie.poster_path}"
-      @reviews = Review.recent_reviews(@movie.id)
+      @reviews = Review.recent(@movie.id)
     end
 end
