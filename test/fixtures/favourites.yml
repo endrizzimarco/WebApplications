@@ -5,6 +5,10 @@ one:
   favourited_id: 1
   favourited_type: 'Movie'
 
+two:
+  user_id: 1
+  favourited_id: 1
+  favourited_type: 'Movie'
 
 valid:
   user_id: 3

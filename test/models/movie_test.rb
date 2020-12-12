@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MovieTest < ActiveSupport::TestCase
   def setup
-    @movie = movies(:valid)
+    @movie = movies(:valid) #id: 3
   end
 
   test 'valid movie' do
@@ -68,7 +68,7 @@ class MovieTest < ActiveSupport::TestCase
     assert_not_nil @movie.errors[:api_id]
   end
 
-  test 'img_path from trusted sources' do 
+  test 'img_path from trusted sources' do
     @movie.img_path = "https://malicious_site.jpg"
     refute @movie.valid? 
     assert_not_nil @movie.errors[:img_path]
@@ -80,11 +80,16 @@ class MovieTest < ActiveSupport::TestCase
     assert @movie.valid?
   end
 
-  test 'if user delete movie from seen list it should be removed from favourites' do 
+  test 'if user delete movie from seen list it should be removed from favourites' do
     movie = movies(:one).destroy
     favourite = favourites(:one) # linked to movies(:one)
     
     movie.destroy
     refute Favourite.exists?(favourited_id: @movie.id)
+  end
+
+  test 'test user_average method' do
+    # 2 fixutres with scores 2.''
+    assert_equal 0.60,  Movie.users_average(641)
   end
 end
