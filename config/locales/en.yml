@@ -53,11 +53,6 @@ en:
       alert: Please insert an email
 
   movies:
-    home:
-      signUp: Sign up 
-      header: now to keep track of the movies you've watched...
-      tagline: And remember the best ones!
-
     index:
       header: No movies added yet!
       tagline: Search for any movie now and add them by clicking the button and giving them a rating!

@@ -1,20 +1,48 @@
 :css
-  p{color: red;}
+  @keyframes rainbow {
+    0%   {color:red;}
+    25%  {color:yellow;}
+    50%  {color:blue;}
+    75%  {color:green;}
+    100% {color:red; }
+  }
+  img{
+    margin-left: 175px;
+  }
+  h1{
+    font-family: helvetica,Arial,sans-serif;
+    animation-name: rainbow;
+    animation-duration: 10s;
+    margin-left: 125px;
+  }
+  .contact-info{
+    font-family: helvetica,Arial,sans-serif;
+    font-size: 18px;
+    line-height: 28px;
+    letter-spacing: 2px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    background-color: #eeeeee;
+    border-radius: 10px;
+    width: 35%
+  }
+  dt{
+    font-weight: bold;
+    font-style: italic;
+  }
 
-%p= "Dear #{t('app_title')},"
-%p= "Could you get in touch with me please? Or not  "
 = image_tag("forms_logo.png", width:90, height:90)
-%dl
-  %dt Name:
-  %dd= @name
-  %dt Email:
-  %dd= @email
-  %dt Telephone:
-  %dd= @telephone
 
-%p= @message
+%h1#title You got mail!
 
-%p Thanks,
-%p= @name
+%dl.contact-info
+  %dt.section From:
+  %dd= 'Name:  ' + @name
+  %dd= 'Email:  ' + @email
+  %dd= 'Telephone:  ' + @telephone
 
-%link{rel:"stylesheet", href:"contact_mailer.css"}
+%dl.contact-info
+  %dt.section Message:
+  %dd= @message
+

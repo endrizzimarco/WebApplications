@@ -44,7 +44,8 @@ class MoviesController < ApplicationController
     # Save the movie api data and the rating into the movies table
     @newmovie = current_user.movies.build(api_id: @movie.id, title: @movie.title, tagline: @movie.tagline, 
             vote_average: @movie.vote_average, genres: @movie.genres, casts: @movie.casts, synopsis: @movie.synopsis,
-            runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, user_rating: params[:user_rating])
+            runtime: @movie.runtime, release_date: @movie.release_date, img_path: @movie.img_path, 
+            user_rating: params.permit(:user_rating)[:user_rating])
 
     if @newmovie.save
       redirect_back fallback_location: '', notice: I18n.t('movies.create.notice')

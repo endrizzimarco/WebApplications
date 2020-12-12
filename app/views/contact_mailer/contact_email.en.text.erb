@@ -1,11 +1,9 @@
-%dt Name:
-%dd= @name
-%dt Email:
-%dd= @email
-%dt Telephone:
-%dd= @telephone
+You got mail!
 
-%p= @message
+From:
+    Name: <%= @name %>
+    Email: <%= @email %>
+    Telephone: <%= @telephone %>
 
-%p Thanks,
-%p= @name
+Message:
+    <%= @message %>
