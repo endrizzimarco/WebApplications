@@ -75,7 +75,7 @@ gem 'jquery-rails'
 gem 'devise'
 
 # Bootstrap gem
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 
 # Ruby wrapper for The Movie Database API
 gem 'themoviedb' 
