@@ -77,7 +77,7 @@ class DeviseControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should destroy user" do
-    # Need to be logged in to access this page
+    # Need to be logged in to destroy user
     get new_user_session_url
     sign_in @user
     post user_session_url
@@ -89,7 +89,7 @@ class DeviseControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update user" do
-    # Need to be logged in to access this page
+    # Need to be logged in to update user
     get new_user_session_url
     sign_in @user
     post user_session_url

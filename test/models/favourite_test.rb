@@ -34,5 +34,4 @@ class FavouriteTest < ActiveSupport::TestCase
     refute @favourite.valid?
     assert_not_nil @favourite.errors[:favourited_type]
   end
-
 end

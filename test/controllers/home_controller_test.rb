@@ -9,7 +9,7 @@ class HomeControllerTest < ActionDispatch::IntegrationTest
     assert_template partial: '_header'
     assert_template partial: '_footer'
 
-    assert_select 'form', count: 2 # 2 search bars in home page
+    assert_select 'form', count: 2 # Search bar in home page + header
     assert_select 'div#title', 'Welcome to MyMovieList'
     assert_select 'h3 a', 'Sign up'
     assert_select 'h3', "Sign up\nto start adding movies to your seen and favourite lists"

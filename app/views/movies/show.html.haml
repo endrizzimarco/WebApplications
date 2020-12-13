@@ -18,13 +18,14 @@
           %a.toggle= t('.seeReviews')
         %h4.textborder= @movie.tagline
         %br
-        -# Form used to 
+        -# Form used to add rating to a movie and add it to seen list
         #addmovie{hidden: ''}
           = form_with url: movies_path do |f|
             #ratyjs
             =hidden_field_tag 'id', @movie.id
             %input.submit.btn.btn-default{type: 'submit', value: t('.submit')}
           %br
+        -# Listing movie details
         %p.textborder.synopsis= @movie.synopsis
         %br
         %p 
@@ -39,12 +40,14 @@
         %p
           = t('.averageRating')
           %span.badge= @movie.vote_average.to_s + ' / 10'
+        -# Show rating only if movie is added for current user
         -if current_user && current_user.movies.exists?(@movie.id)
           %p
             = t('.yourRating')
             %span.badge.alert-success= @movie.user_rating.to_s + ' / 10'
             %span#edit.glyphicon.glyphicon-edit
-          #changeRating{hidden: ''}
+          -# Html range input element used to edit a rating for a movie
+          #changeRating{hidden: ''} 
             =form_tag movie_path(@movie), method: 'patch', oninput: 'x.value=parseFloat(score.value).toFixed(1)' do
               %input#slidebar{max: '10', min: '0', name: 'score', step: '0.5', type: "range", value: @movie.user_rating}
               %output{name: 'x'}= @movie.user_rating
@@ -74,7 +77,7 @@
             = User.find(review.user_id).email # Email of the user that wrote the review
             .ratyscore{score: Movie.find(review.movie_id).user_rating}= # Score is tied to the saved movie not the review
             = review.comment # Review content
-            -if current_user and review.user_id == current_user.id # If user wrote the review show edit and delete buttons
+            -if current_user and review.user_id == current_user.id # If user wrote the review show the edit and delete buttons
               = link_to t('.edit'), edit_movie_review_path(@movie, review.id)
               = link_to t('.delete'), movie_review_path(@movie, review.id), method: :delete
             %hr

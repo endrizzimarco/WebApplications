@@ -1,12 +1,14 @@
 class HomeController < ApplicationController
 
-  # GET root
+  # GET /root
   def home
   end
 
+  # GET /contact
   def contact
   end
 
+  # POST /request_contact
   def request_contact
     name = params[:name]
     email = params[:email]
@@ -14,9 +16,9 @@ class HomeController < ApplicationController
     message = params[:message]
 
     unless email.blank?
-      redirect_back fallback_location:'/', notice: I18n.t('home.request_contact.notice')
+      redirect_back fallback_location:'', notice: I18n.t('home.request_contact.notice')
     else 
-      redirect_back fallback_location:'/', alert: I18n.t('home.request_contact.alert') 
+      redirect_back fallback_location:'', alert: I18n.t('home.request_contact.alert') 
     end
   end
 end

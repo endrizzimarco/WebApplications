@@ -1,7 +1,8 @@
 .row
   .col-sm-3
   .col-sm-6
-    #title Welcome to MyMovieList
+    #title= t('.welcome')
+    -# Home page search bar
     %form.input-group{action: '/search'}
       %input.form-control.input-lg{placeholder: t('.search'), type: 'text', name: 'q'}
       .input-group-btn
@@ -10,4 +11,4 @@
     %br 
     %h3 
       = link_to t('.signUp'), new_user_registration_path
-      to start adding movies to your seen and favourite lists
+      = t('.start')

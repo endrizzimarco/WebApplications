@@ -12,7 +12,7 @@
       .row
         .container-fluid
           %ul
-            -unless user_signed_in?
+            -unless user_signed_in? # Links that appear when no user is logged in
               %a{href: new_user_registration_path} 
                 .pill
                   .glyphicon.glyphicon-user
@@ -21,7 +21,7 @@
                 .pill
                   %span.glyphicon.glyphicon-log-in
                   = t('.logIn')
-            -else
+            -else  # Links that appear when user is logged in
               %a{href: edit_user_registration_path}
                 .pill
                   .glyphicon.glyphicon-user
@@ -32,6 +32,7 @@
                   = t('.logOut')
       .row
         .col-sm-8
+          -# These links are always visible
           %ul.nav.navbar-nav
             %li
               %a{href: root_path}
@@ -53,6 +54,7 @@
               %a{href: contact_path}
                 .glyphicon.glyphicon-envelope
                 = t('.contact')
+        -# Search bar
         .col-sm-4
           %ul.navbar-form.navbar-nav.navbar-right
             = form_tag('/search', method: 'get', role: 'search') do

@@ -58,9 +58,9 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
     assert_template partial: '_footer'
 
     act = assigns(:movies)
-    exp = movies(:one) #only movie assigned to user 1
+    exp = movies(:one) # Only movie assigned to user 1
 
-    # Only movie currently showing in index is movie 1
+    # Assertin only movie currently showing in index is movie 1
     assert_equal 1, act.size
     assert_equal exp.title, act.first.title
   end
@@ -77,7 +77,7 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
       post movies_url(), params: {id: @movie.api_id, user_rating: 10.0} 
     end
     
-    #check if created movie is populated with correct data from the api
+    # Check if created movie is populated with correct data from the api
     newmovie = Movie.last
     assert_equal(@movie.title, newmovie.title)
     assert_equal(@movie.vote_average, newmovie.vote_average)
@@ -97,7 +97,7 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
 
   # Show view requires 3 separate test cases
   test "should show movie (whilst logged in and movie not saved)" do 
-    @movie = movies(:two) # not saved for user 1
+    @movie = movies(:two) # Not saved for user 1
     get movie_url(@movie.api_id)
     assert_response :success
 
@@ -117,7 +117,7 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'span.alert-info', act['genre']
     assert_select 'span.alert-warning', act['release_date']  # Favourite stars
 
-    # Testing elements that should not appear if movie is saved
+    # Testing elements that should not appear if movie is saved and you are not logged in
     assert_select 'a.glyphicon', count: 0 # Favourite stars
     assert_select 'button.btn-lg', count: 1 # Add to movie list button
     assert_select 'span.alert-success', count: 0 # 'Your rating' section
@@ -132,7 +132,7 @@ class MoviesControllerTest < ActionDispatch::IntegrationTest
     assert_template partial: '_header'
     assert_template partial: '_footer'
 
-    # Testing elements that should not appear if movie isnt't saved
+    # Testing elements that should not appear if movie isnt't saved but you are logged in
     assert_select 'a.glyphicon', count: 1 # Favourite stars
     assert_select 'button.btn-lg', count: 0 # Add to movie list button
     assert_select 'span.alert-success', count: 1 # 'Your rating' section

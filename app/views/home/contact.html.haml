@@ -1,5 +1,5 @@
 .text-center
-  %h2.textborder Contact Us
+  %h2.textborder= t('.contactUs')
   .form-signin
     = form_tag request_contact_path, method: 'post', id: 'contactForm' do
       .form-group

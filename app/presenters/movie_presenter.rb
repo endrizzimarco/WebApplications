@@ -3,6 +3,7 @@ class MoviePresenter
     @movie = movie
   end
 
+  # Unpack hashmap values
   def data
     OpenStruct.new(
       id: @movie['id'],

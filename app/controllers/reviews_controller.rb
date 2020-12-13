@@ -1,7 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:edit, :update, :destroy]
   before_action :set_movie
-  before_action :authenticate_user!
 
   # GET /movies/:movie_id/reviews/new
   def new

@@ -39,9 +39,12 @@ en:
 
   home:
     home:
+      welcome: Welcome to MyMovieList
       search: Search Movies ...
       signUp: Sign up
+      start: to start adding movies to your seen and favourite lists
     contact:
+      contactUs: Contact Us
       name: Name
       email: Email
       telephone: Telephone
@@ -156,5 +159,11 @@ en:
       gitlab: GitLab
       darkTheme: Dark Theme
       backToTop: Back to top
+    
+  contact_mailer:
+    contact_email:
+      received: You got mail!
+      from: 'From:'
+      message: 'Message:'
 
 

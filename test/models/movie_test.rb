@@ -2,7 +2,7 @@ require 'test_helper'
 
 class MovieTest < ActiveSupport::TestCase
   def setup
-    @movie = movies(:valid) #id: 3
+    @movie = movies(:valid)
   end
 
   test 'valid movie' do
@@ -45,9 +45,8 @@ class MovieTest < ActiveSupport::TestCase
     assert_not_nil @movie.errors[:user_rating]
   end
 
-  # There are 2 fixtures with movie_id: 3
   test 'check review associations' do 
-    assert_equal 2, @movie.reviews.size
+    assert_equal 2, @movie.reviews.size # There are 2 review fixtures with movie_id = movies(:valid)
   end 
 
   test 'user rating can not go above 10' do
@@ -82,14 +81,14 @@ class MovieTest < ActiveSupport::TestCase
 
   test 'if user delete movie from seen list it should be removed from favourites' do
     movie = movies(:one).destroy
-    favourite = favourites(:one) # linked to movies(:one)
+    favourite = favourites(:one) # Linked to movies(:one)
     
     movie.destroy
     refute Favourite.exists?(favourited_id: @movie.id)
   end
 
   test 'test user_average method' do
-    # 2 fixutres with scores 2.''
-    assert_equal 0.60,  Movie.users_average(641)
+    # 2 fixtures with scores 2 and 10, average should be 6
+    assert_equal 0.6e1,  Movie.users_average(641)
   end
 end

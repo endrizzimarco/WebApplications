@@ -46,7 +46,7 @@ class ReviewTest < ActiveSupport::TestCase
     assert_includes Review.recent(641), reviews(:four)
     assert_includes Review.recent(641), reviews(:five)
 
-    #Should not include old reviews
+    # Should not include old reviews
     refute_includes Review.recent(641), reviews(:two)
     refute_includes Review.recent(641), reviews(:six)
   end

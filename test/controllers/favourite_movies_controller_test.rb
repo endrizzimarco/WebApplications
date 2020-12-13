@@ -20,9 +20,9 @@ class FavouriteMoviesControllerTest < ActionDispatch::IntegrationTest
     assert_template partial: '_footer'
 
     act = assigns(:movies)
-    exp = favourites(:two) #only favourite movie assigned to user 1
+    exp = favourites(:two) # Only favourite movie assigned to user 1
 
-    # Only movie currently showing in index is movie 1
+    # Assert only movie currently showing in index is movie 1
     assert_equal 1, act.size
     assert_equal exp.favourited_id, act.first.id
   end

@@ -28,27 +28,27 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'should destroy movies with user' do
-    movie = movies(:two) # linked to users(:valid)
+    movie = movies(:two) # Linked to users(:valid)
     @user.destroy
 
-    refute Movie.exists?(movie.id) #check movie is destroyed with user
+    refute Movie.exists?(movie.id) # Check movie is destroyed with user
   end
 
-  # 3 reviews fixtures set up with user_id: 3
+  
   test 'check reviews association' do
-    assert_equal 3, @user.reviews.size
+    assert_equal 3, @user.reviews.size # 3 reviews fixtures set up with user_id = users(:valid)
   end
 
   test 'should destroy reviews with user' do
     review = reviews(:six) # linked to users(:valid)
     @user.destroy
 
-    refute Review.exists?(review.id) #check review is destroyed with user
+    refute Review.exists?(review.id) # Check review is destroyed with user
   end
 
-  # 3 reviews fixtures set up with user_id: 3
+  
   test 'check favourites association' do
-    assert_equal 2, @user.favourites.size
+    assert_equal 2, @user.favourites.size # 2 favourites fixtures set up with user_id = users(:valid)
   end
 
   test 'should destroy favourites with user' do

@@ -52,6 +52,6 @@ class ReviewsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Review.count', -1) do
       delete movie_review_url(@review.movie_id, @review)
     end
-    assert_redirected_to ''
+    assert_redirected_to '' # assert redirect back
   end
 end
